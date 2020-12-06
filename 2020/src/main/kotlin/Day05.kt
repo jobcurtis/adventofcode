@@ -37,6 +37,11 @@ private data class BoardingPass(val value: CharSequence) {
     }
 
     val id = (getRow() * 8) + getCol()
+    
+    val idActuallyDuh = value
+        .replace(Regex("[BR]"), "1")
+        .replace(Regex("[FL]"), "0")
+        .toInt(2)
 
 }
 
@@ -54,9 +59,9 @@ fun main() {
     
     val input = getResourceAsLines(FILENAME)
 
-    val part1 = input.map(::BoardingPass).map(BoardingPass::id).maxOrNull()
-    val part2 = input.map(::BoardingPass).map(BoardingPass::id).findMissing()
-    
+    val part1 = input.map(::BoardingPass).map(BoardingPass::idActuallyDuh).maxOrNull()
+    val part2 = input.map(::BoardingPass).map(BoardingPass::idActuallyDuh).findMissing()
+
     println("Part 1: $part1")
     println("Part 2: $part2")
 
