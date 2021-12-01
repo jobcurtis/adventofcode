@@ -1,6 +1,7 @@
-@file:Suppress("SpellCheckingInspection")
-
 rootProject.name = "adventofcode"
 
-include("2019")
-include("2020")
+include(
+    "2019",
+    "2020",
+    "2021",
+)
