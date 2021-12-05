@@ -1,20 +1,20 @@
 package com.emlett.aoc
 
 private const val BOARD_SIZE = 5
+private const val MARK = -1
 
 fun main() {
     val input = readAsLines("Day04.txt")
     val numbers = input.first().split(',').map(String::toInt)
     val boards: List<Matrix> = input.drop(1)
-        .chunked(BOARD_SIZE + 1)
+        .filter(String::isNotBlank)
+        .chunked(BOARD_SIZE)
         .map { chunk ->
-            chunk.filterNot(String::isBlank)
-                .map { line ->
-                    line.split(' ')
-                        .filterNot(String::isBlank)
-                        .map(String::toInt)
-                        .toIntArray()
-                }.toTypedArray()
+            chunk.map { line ->
+                line.split(' ')
+                    .filter(String::isNotBlank)
+                    .map(String::toInt)
+            }
         }
 
     val part1 = Day04.part1(numbers, boards)
@@ -24,28 +24,22 @@ fun main() {
     println("Part 2: $part2")
 }
 
-typealias Matrix = Array<IntArray>
+typealias Matrix = List<List<Int>>
 
-fun Matrix.mark(number: Int): Matrix {
-    val result = this.clone()
-    for (i in result.indices) {
-        for (j in result[i].indices) {
-            if (result[i][j] == number) result[i][j] = -1
-        }
-    }
-    return result
+fun Matrix.mark(number: Int): Matrix = this.map { row ->
+    row.map { if (it == number) MARK else it }
 }
 
 fun Matrix.isSolved(): Boolean {
-    val horizontal = this.any { it.all { i -> i == -1 } }
-    val vertical = this.transpose().any { it.all { i -> i == -1 } }
-    return horizontal || vertical
+    val horizontal = { any { it.all(MARK::equals) } }
+    val vertical = { transpose().any { it.all(MARK::equals) } }
+    return horizontal() || vertical()
 }
 
 fun Matrix.transpose(): Matrix {
     val n = size
     val m = first().size
-    val transposed = Array(m) { IntArray(n) }
+    val transposed = MutableList(m) { MutableList(n) { 0 } }
 
     for (i in 0 until m) {
         for (j in 0 until n) {
@@ -56,20 +50,16 @@ fun Matrix.transpose(): Matrix {
     return transposed
 }
 
-fun Matrix.sum(): Int {
-    return this.sumOf { row -> row.sumOf { if (it == -1) 0 else it } }
-}
+fun Matrix.sum(): Int = sumOf { it.filterNot(MARK::equals).sum() }
 
 object Day04 {
     fun part1(numbers: List<Int>, boards: List<Matrix>): Int {
-        var playedBoards = boards
-        var result: Matrix?
-
-        for (num in numbers) {
-            playedBoards = playedBoards.map { it.mark(num) }
-            result = playedBoards.firstOrNull(Matrix::isSolved)
-
-            if (result != null) return result.sum() * num
+        numbers.fold(boards) { acc, num ->
+            acc.map { it.mark(num) }.also {
+                it.firstOrNull(Matrix::isSolved)?.also { solved ->
+                    return solved.sum() * num
+                }
+            }
         }
 
         throw IllegalStateException()
@@ -88,8 +78,6 @@ object Day04 {
                 val result = playedBoards.firstOrNull(Matrix::isSolved)
 
                 if (result != null) return result.sum() * num
-            } else {
-                throw IllegalStateException()
             }
         }
         throw IllegalStateException()
