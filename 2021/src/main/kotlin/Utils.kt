@@ -10,3 +10,4 @@ private val String.fullPath: String
 
 fun readAsLines(filename: String) = File(filename.fullPath).readLines()
 fun readAsInts(filename: String) = readAsLines(filename).map(String::toInt)
+fun readAsString(filename: String) = File(filename.fullPath).readText()
