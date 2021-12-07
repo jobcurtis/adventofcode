@@ -1,23 +1,17 @@
 package com.emlett.aoc
 
 fun main() {
-    val fishMap = readAsString("Day06.txt")
-        .trim().split(',').map(String::toInt)
-        .groupBy { it }
-        .map { (k, v) -> k to v.size.toLong() }
-        .toMap()
+    val input = readAsString("Day06.txt").trim().split(',').map(String::toInt)
+    val fish = List(9) { index -> input.count(index::equals).toLong() }
 
-    println("Part 1: ${fishMap.cycle(80).values.sum()}")
-    println("Part 2: ${fishMap.cycle(256).values.sum()}")
+    println("Part 1: ${fish.cycle(80).sum()}")
+    println("Part 2: ${fish.cycle(256).sum()}")
 }
 
-fun Map<Int, Long>.cycle(times: Int) = (0 until times).fold(this) { result, _ ->
-    val tmp = mutableMapOf<Int, Long>()
-    for (i in 8 downTo 0) {
-        tmp[i - 1] = result[i] ?: 0
+fun List<Long>.cycle(times: Int) = (0 until times)
+    .fold(this.toMutableList()) { acc, _ ->
+        val next = acc.removeFirst()
+        acc[6] += next
+        acc.add(next)
+        return@fold acc
     }
-    val newGen = tmp.remove(-1) ?: 0
-    tmp[6] = tmp.getOrDefault(6, 0).plus(newGen)
-    tmp[8] = tmp.getOrDefault(8, 0).plus(newGen)
-    return@fold tmp
-}
