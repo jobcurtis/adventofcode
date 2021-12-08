@@ -14,7 +14,7 @@ fun main() {
     val part2 = run {
         val mean = input.average().roundToInt()
         val area = (mean - 10) .. (mean + 10)
-        area.toList().minOf { i -> input.sumOf { abs(it - i).let { it * (it + 1) / 2 } } }
+        area.toList().minOf { i -> input.sumOf { sumOfIntegers(abs(it - i)) } }
     }
 
     println("Part 1: $part1")
@@ -25,3 +25,5 @@ fun List<Int>.median(): Int = sorted().run {
     if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
     else this[size / 2]
 }
+
+fun sumOfIntegers(n: Int) = n * (n + 1) / 2
