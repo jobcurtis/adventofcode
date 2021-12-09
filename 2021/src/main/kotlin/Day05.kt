@@ -9,7 +9,7 @@ fun main() {
     val input = readAsLines("Day05.txt")
         .mapNotNull(regex::matchEntire)
         .map { it.groupValues.drop(1).map(String::toInt) }
-        .map { Line(Point(it[0], it[1]), Point(it[2], it[3])) }
+        .map { Line(Coordinate(it[0], it[1]), Coordinate(it[2], it[3])) }
 
     val part1 = input
         .filterNot(Line::isDiagonal)
@@ -26,16 +26,16 @@ fun main() {
     println("Part 2: $part2")
 }
 
-data class Point(val x: Int, val y: Int)
+data class Coordinate(val x: Int, val y: Int)
 
-data class Line(val a: Point, val b: Point) {
+data class Line(val a: Coordinate, val b: Coordinate) {
     fun isDiagonal(): Boolean = !(a.x == b.x || a.y == b.y)
 
-    fun points(): List<Point> {
+    fun points(): List<Coordinate> {
         val dx = (b.x - a.x).sign
         val dy = (b.y - a.y).sign
         val steps = max(abs(a.x - b.x), abs(a.y - b.y))
 
-        return List(steps + 1) { Point(a.x + (dx * it), a.y + (dy * it)) }
+        return List(steps + 1) { Coordinate(a.x + (dx * it), a.y + (dy * it)) }
     }
 }
