@@ -27,7 +27,7 @@ fun main() {
         .map { point -> map.basin(point).size }
         .sortedDescending()
         .take(3)
-        .reduce { acc, i -> acc * i }
+        .reduce(Int::times)
         .also { println("Part 2: $it") }
 }
 

@@ -18,3 +18,13 @@ val Point.x: Int get() = first
 val Point.y: Int get() = second
 
 infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + other.y)
+
+fun List<Long>.median(): Long = sorted().run {
+    if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
+    else this[size / 2]
+}
+
+fun List<Int>.median(): Int = sorted().run {
+    if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
+    else this[size / 2]
+}

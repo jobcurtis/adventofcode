@@ -21,9 +21,4 @@ fun main() {
     println("Part 2: $part2")
 }
 
-fun List<Int>.median(): Int = sorted().run {
-    if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
-    else this[size / 2]
-}
-
 fun sumOfIntegers(n: Int) = n * (n + 1) / 2
