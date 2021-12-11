@@ -17,6 +17,16 @@ typealias Point = Pair<Int, Int>
 val Point.x: Int get() = first
 val Point.y: Int get() = second
 
+val Point.adjacentPoints: Set<Point>
+    get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)
+        .map { diff -> this + diff }
+        .toSet()
+
+val Point.adjacentPointsDiagonal: Set<Point>
+    get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
+        .map { diff -> this + diff }
+        .toSet()
+
 infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + other.y)
 
 fun List<Long>.median(): Long = sorted().run {
