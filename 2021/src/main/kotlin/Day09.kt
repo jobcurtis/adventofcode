@@ -38,8 +38,3 @@ fun Map<Point, Int>.basin(currentPoint: Point): Set<Point> =
             if (getValue(adjacentPoint) <= getValue(currentPoint)) points
             else points + basin(adjacentPoint)
         }
-
-val Point.adjacentPoints: Set<Point>
-    get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)
-        .map { diff -> this + diff }
-        .toSet()
