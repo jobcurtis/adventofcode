@@ -38,3 +38,6 @@ fun List<Int>.median(): Int = sorted().run {
     if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
     else this[size / 2]
 }
+
+fun Collection<Long>.max() = this.maxOf { it }
+fun Collection<Long>.min() = this.minOf { it }
