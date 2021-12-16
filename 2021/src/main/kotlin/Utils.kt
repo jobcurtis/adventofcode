@@ -29,6 +29,9 @@ val Point.adjacentPointsDiagonal: Set<Point>
 
 infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + other.y)
 
+fun Set<Point>.min(): Point = minByOrNull { it.x + it.y } ?: throw NoSuchElementException()
+fun Set<Point>.max(): Point = maxByOrNull { it.x + it.y } ?: throw NoSuchElementException()
+
 fun List<Long>.median(): Long = sorted().run {
     if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
     else this[size / 2]
@@ -41,3 +44,15 @@ fun List<Int>.median(): Int = sorted().run {
 
 fun Collection<Long>.max() = this.maxOf { it }
 fun Collection<Long>.min() = this.minOf { it }
+
+/**
+ * Returns a list containing elements up to and including the first that satisfies the [predicate].
+ */
+inline fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
+    val list = ArrayList<T>()
+    for (item in this) {
+        list.add(item)
+        if (predicate(item)) break
+    }
+    return list
+}
