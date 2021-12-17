@@ -32,6 +32,9 @@ infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + ot
 fun Set<Point>.min(): Point = minByOrNull { it.x + it.y } ?: throw NoSuchElementException()
 fun Set<Point>.max(): Point = maxByOrNull { it.x + it.y } ?: throw NoSuchElementException()
 
+fun <T : Comparable<T>> Iterable<T>.min() = minByOrNull { it } ?: throw NoSuchElementException()
+fun <T : Comparable<T>> Iterable<T>.max() = maxByOrNull { it } ?: throw NoSuchElementException()
+
 fun List<Long>.median(): Long = sorted().run {
     if (size % 2 == 0) (this[size / 2] + this[(size / 2) - 1]) / 2
     else this[size / 2]
@@ -56,3 +59,5 @@ inline fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
     }
     return list
 }
+
+fun sumOfIntegers(n: Int) = n * (n + 1) / 2

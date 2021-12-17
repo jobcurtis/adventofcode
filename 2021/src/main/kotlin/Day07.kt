@@ -20,5 +20,3 @@ fun main() {
     println("Part 1: $part1")
     println("Part 2: $part2")
 }
-
-fun sumOfIntegers(n: Int) = n * (n + 1) / 2
