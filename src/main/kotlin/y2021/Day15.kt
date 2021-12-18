@@ -1,20 +1,17 @@
-package com.emlett.aoc
+package com.emlett.aoc.y2021
 
-import java.util.PriorityQueue
-import kotlin.system.measureTimeMillis
+import java.util.*
 
-fun main() {
-    val lines = readAsLines("Day15.txt")
+object Day15 : Year2021() {
+    private val dimX = lines.first().length
+    private val dimY = lines.size
 
-    lines.flatMapIndexed { y, ln -> ln.mapIndexed { x, risk -> Point(x, y) to risk.digitToInt() } }
+    override fun part1() = lines
+        .flatMapIndexed { y, ln -> ln.mapIndexed { x, risk -> Point(x, y) to risk.digitToInt() } }
         .toMap()
-        .let { input -> dijkstra2(input, input.keys.min(), input.keys.max()) }
-        .also { println("Part 1: $it") }
+        .let { input -> dijkstra(input, input.keys.min(), input.keys.max()) }
 
-    val dimX = lines.first().length
-    val dimY = lines.size
-
-    (0 until 5).flatMap { ry ->
+    override fun part2() = (0 until 5).flatMap { ry ->
         (0 until 5).flatMap { rx ->
             lines.flatMapIndexed { y, ln ->
                 ln.mapIndexed { x, risk ->
@@ -25,17 +22,13 @@ fun main() {
         }
     }
         .toMap()
-        .let { input -> dijkstra2(input, input.keys.min(), input.keys.max()) }
-        .also { println("Part 2: $it") }
-}
+        .let { input -> dijkstra(input, input.keys.min(), input.keys.max()) }
 
-fun dijkstra2(map: Map<Point, Int>, start: Point, end: Point): Int {
-    var result: Int? = null
-    measureTimeMillis {
+    private fun dijkstra(map: Map<Point, Int>, start: Point, end: Point): Int {
         val weights: MutableMap<Point, Int> = mutableMapOf(start to 0).withDefault { Int.MAX_VALUE }
         val visited = mutableSetOf(start)
-        val next =
-            PriorityQueue<Point> { l, r -> weights.getValue(l).compareTo(weights.getValue(r)) }.apply { add(start) }
+        val next = PriorityQueue<Point> { l, r -> weights.getValue(l).compareTo(weights.getValue(r)) }
+            .apply { add(start) }
 
         while (next.isNotEmpty()) {
             val currentNode = next.remove().also { visited.add(it) }
@@ -50,7 +43,6 @@ fun dijkstra2(map: Map<Point, Int>, start: Point, end: Point): Int {
             }
         }
 
-        result = weights.getValue(end)
-    }.also { println("Runtime: ${it}ms") }
-    return result!!
+        return weights.getValue(end)
+    }
 }

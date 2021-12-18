@@ -1,13 +1,9 @@
-package com.emlett.aoc
+package com.emlett.aoc.y2021
 
-import com.emlett.aoc.Day02.part1
-import com.emlett.aoc.Day02.part2
-
-object Day02 {
-
+object Day02 : Year2021() {
     data class Sub(val x: Long = 0, val y: Long = 0, val aim: Long = 0)
 
-    val part1 = readAsLines("Day02.txt")
+    override fun part1() = lines
         .map { it.split(' ') }
         .map { it[0] to it[1].toLong() }
         .fold(Sub(0, 0)) { pos, (dir, mag) ->
@@ -20,7 +16,7 @@ object Day02 {
         }
         .run { x * y }
 
-    val part2 = readAsLines("Day02.txt")
+    override fun part2() = lines
         .map { it.split(' ') }
         .map { it[0] to it[1].toLong() }
         .fold(Sub(0, 0, 0)) { pos, (dir, mag) ->
@@ -32,9 +28,4 @@ object Day02 {
             }
         }
         .run { x * y }
-}
-
-fun main() {
-    println("Part 1: $part1")
-    println("Part 2: $part2")
 }

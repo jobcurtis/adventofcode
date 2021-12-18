@@ -1,7 +1,6 @@
-package com.emlett.aoc
+package com.emlett.aoc.y2021
 
-import java.io.File
-import java.io.FileNotFoundException
+import java.io.*
 
 private val classloader = {}::class.java.classLoader!!
 
@@ -61,3 +60,5 @@ inline fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
 }
 
 fun sumOfIntegers(n: Int) = n * (n + 1) / 2
+
+typealias Matrix = List<List<Int>>
