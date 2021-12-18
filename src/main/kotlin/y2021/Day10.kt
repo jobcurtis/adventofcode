@@ -1,23 +1,10 @@
-package com.emlett.aoc
+package com.emlett.aoc.y2021
 
-val pairs = mapOf(
-    ')' to '(',
-    ']' to '[',
-    '}' to '{',
-    '>' to '<',
-)
+object Day10 : Year2021() {
+    private val pairs = mapOf(')' to '(', ']' to '[', '}' to '{', '>' to '<')
+    private val values = mapOf(')' to 1L, ']' to 2L, '}' to 3L, '>' to 4L)
 
-val values = mapOf(
-    ')' to 1L,
-    ']' to 2L,
-    '}' to 3L,
-    '>' to 4L,
-)
-
-fun main() {
-    val input = readAsLines("Day10.txt")
-
-    input.mapNotNull { line ->
+    override fun part1() = lines.mapNotNull { line ->
         val stack = ArrayDeque<Char>()
         line.firstOrNull { char ->
             when (char) {
@@ -38,9 +25,8 @@ fun main() {
             else -> throw IllegalStateException()
         }
     }
-        .also { println("Part 1: $it") }
 
-    input.mapNotNull { line ->
+    override fun part2() = lines.mapNotNull { line ->
         val stack = ArrayDeque<Char>()
         line.forEach { char ->
             when (char) {
@@ -52,9 +38,6 @@ fun main() {
             }
         }
         stack.reversed().map { pairs.entries.single { (_, v) -> v == it }.key }
-    }
-        .map { it.map(values::getValue).reduce { acc, i -> (acc * 5) + i } }
-        .median()
-        .also { println("Part 2: $it") }
+    }.map { it.map(values::getValue).reduce { acc, i -> (acc * 5) + i } }.median()
 
 }

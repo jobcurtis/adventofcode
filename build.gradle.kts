@@ -1,33 +1,42 @@
+@file:Suppress("SuspiciousCollectionReassignment")
+
+import org.jetbrains.kotlin.gradle.tasks.*
+
 plugins {
-    kotlin("jvm") version "1.6.0" apply false
+    application
+    kotlin("jvm")
+    kotlin("plugin.serialization")
 }
 
-allprojects {
-    group = "com.emlett"
-    version = "1.0-SNAPSHOT"
+group = "com.emlett"
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
 }
 
-subprojects {
-    apply(plugin = "kotlin")
+application {
+    mainClass.set("com.emlett.aoc.AOCKt")
+}
 
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
+dependencies {
+    implementation(Kotlin.stdlib)
+    implementation(kotlin("reflect"))
+    implementation(KotlinX.serialization.json)
 
-    val implementation by configurations
-    val testImplementation by configurations
-
-    dependencies {
-        implementation(kotlin("stdlib"))
-        testImplementation("org.junit.jupiter:junit-jupiter:5.+")
-    }
+    testImplementation(Kotlin.test.junit5)
 }
 
 tasks {
+    withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
+        }
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
+
     wrapper {
         gradleVersion = "7.3"
     }
