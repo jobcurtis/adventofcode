@@ -1,15 +1,12 @@
 package com.emlett.aoc.y2021
 
 import java.io.*
+import kotlin.math.*
 
 private val classloader = {}::class.java.classLoader!!
 
 private val String.fullPath: String
     get() = classloader.getResource(this)?.path ?: throw FileNotFoundException()
-
-fun readAsLines(filename: String) = File(filename.fullPath).readLines()
-fun readAsInts(filename: String) = readAsLines(filename).map(String::toInt)
-fun readAsString(filename: String) = File(filename.fullPath).readText()
 
 typealias Point = Pair<Int, Int>
 
@@ -21,6 +18,13 @@ val Point.adjacentPoints: Set<Point>
         .map { diff -> this + diff }
         .toSet()
 
+val Point.gridAround: Set<Point>
+    get() = listOf(
+        -1 to -1, +0 to -1, +1 to -1,
+        -1 to +0, +0 to +0, +1 to +0,
+        -1 to +1, +0 to +1, +1 to +1,
+    ).map { diff -> this + diff }.toSet()
+
 val Point.adjacentPointsDiagonal: Set<Point>
     get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
         .map { diff -> this + diff }
@@ -30,6 +34,16 @@ infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + ot
 
 fun Set<Point>.min(): Point = minByOrNull { it.x + it.y } ?: throw NoSuchElementException()
 fun Set<Point>.max(): Point = maxByOrNull { it.x + it.y } ?: throw NoSuchElementException()
+
+data class Line(val a: Point, val b: Point)
+
+val Line.points: Set<Point> get() {
+    val dx = (b.x - a.x).sign
+    val dy = (b.y - a.y).sign
+    val steps = max(abs(a.x - b.x), abs(a.y - b.y))
+
+    return List(steps + 1) { Point(a.x + (dx * it), a.y + (dy * it)) }.toSet()
+}
 
 fun <T : Comparable<T>> Iterable<T>.min() = minByOrNull { it } ?: throw NoSuchElementException()
 fun <T : Comparable<T>> Iterable<T>.max() = maxByOrNull { it } ?: throw NoSuchElementException()
