@@ -3,7 +3,7 @@ package com.emlett.aoc.y2021
 import kotlin.math.*
 
 object Day07 : Year2021() {
-    val input = text.split(',').map(String::toInt)
+    private val input = text.split(',').map(String::toInt)
 
     override fun part1() = run {
         val median = input.median()

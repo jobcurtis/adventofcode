@@ -59,6 +59,16 @@ inline fun <T> Iterable<T>.takeUntil(predicate: (T) -> Boolean): List<T> {
     return list
 }
 
+inline fun <T> Iterable<T>.atLeast(number: Int, predicate: (T) -> Boolean): Boolean {
+    var count = 0
+    for (element in this) {
+        if (predicate(element)) {
+            if (++count >= number) return true
+        }
+    }
+    return false
+}
+
 fun sumOfIntegers(n: Int) = n * (n + 1) / 2
 
 typealias Matrix = List<List<Int>>
