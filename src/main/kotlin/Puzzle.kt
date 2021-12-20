@@ -20,10 +20,9 @@ abstract class Puzzle {
     protected val String.digits get() = filter(Char::isDigit)
 
     fun print() {
-        print("""
-            Year $year, Day $day
-              - Part 1: $part1
-              - Part 2: $part2
-        """.trimIndent())
+        print("Year $year, Day $day")
+        print("\n  - Part 1: $part1")
+        print("\n  - Part 2: $part2")
+        println()
     }
 }
