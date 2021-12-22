@@ -1,14 +1,13 @@
 package com.emlett.aoc.y2021
 
 object Day08 : Year2021() {
-    val input = readAsLines("Year2021/Day08.txt").map { it.split('|') }
+    val input = lines.map { it.split('|') }
         .map { it.map { it.trim().split(' ') } }
         .map { it.map { it.map(String::toCharArray).map(CharArray::sortedArray) } }
         .map { (signal, output) -> signal to output }
 
     override fun part1() = input.flatMap { it.second }
         .count { it.size in arrayOf(2, 3, 4, 7) }
-        .also { println("Part 1: $it") }
 
     override fun part2() = input.map { (signals, outputs) ->
         MutableList(10) { charArrayOf() }.apply {
@@ -23,7 +22,7 @@ object Day08 : Year2021() {
             this[5] = signals.match(5) { this[6].count(it::contains) == 5 }
             this[0] = signals.match(6) { (this[6] + this[9]).count(it::contains) == 10 }
         }.run { outputs.map { indexOfFirst(it::contentEquals) } }
-    }.map { it.joinToString("") }.sumOf { it.toInt() }.also { println("Part 2: $it") }
+    }.map { it.joinToString("") }.sumOf { it.toInt() }
 
     private inline fun List<CharArray>.match(
         size: Int,

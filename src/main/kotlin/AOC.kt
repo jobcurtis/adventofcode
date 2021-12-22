@@ -10,11 +10,13 @@ fun getInput(puzzle: Puzzle): File {
 }
 
 fun getPuzzle(year: String, day: String): Puzzle {
-    val qualifiedName = "${Puzzle::class.java.packageName}.y$year.Day$day"
+    val yr = year.filter(Char::isDigit)
+    val dy = day.filter(Char::isDigit).padStart(2, '0')
+    val qualifiedName = "${Puzzle::class.java.packageName}.y$yr.Day$dy"
     val kClass = Class.forName(qualifiedName).kotlin
     return (requireNotNull(kClass.objectInstance) as Puzzle)
 }
 
 fun main(args: Array<String>) = args.let { (year, day) ->
-    getPuzzle(year.filter(Char::isDigit), day.filter(Char::isDigit).padStart(2, '0')).print()
+    getPuzzle(year, day).print()
 }

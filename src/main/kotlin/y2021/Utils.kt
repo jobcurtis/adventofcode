@@ -1,17 +1,15 @@
 package com.emlett.aoc.y2021
 
-import java.io.*
 import kotlin.math.*
 
-private val classloader = {}::class.java.classLoader!!
-
-private val String.fullPath: String
-    get() = classloader.getResource(this)?.path ?: throw FileNotFoundException()
-
+typealias LongPair = Pair<Long, Long>
+typealias IntPair = Pair<Int, Int>
 typealias Point = Pair<Int, Int>
 
 val Point.x: Int get() = first
 val Point.y: Int get() = second
+
+fun <A, B> Pair<A, B>.flip(): Pair<B, A> = second to first
 
 val Point.adjacentPoints: Set<Point>
     get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)

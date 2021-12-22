@@ -38,15 +38,6 @@ object Day20 : Year2021() {
         else -> throw IllegalArgumentException()
     }
 
-    private fun Map<Point, Int>.asString() = keys.run { min() to max() }
-        .let { (min, max) ->
-            "\n" + (min.y..max.y).joinToString("\n") { y ->
-                (min.x..max.x).joinToString(" ") { x ->
-                    this.getOrDefault(x to y, 0).toString()
-                }
-            }
-        }
-
     override fun part1() = (0 until 2)
         .fold(input) { acc, _ -> acc.enhance(algorithm) }
         .values.count { it == 1 }
