@@ -1,6 +1,7 @@
 package com.emlett.aoc
 
-import java.io.File
+import com.emlett.aoc.utils.*
+import java.io.*
 
 abstract class Puzzle {
     private val file: File by lazy { getInput(this) }
@@ -14,15 +15,15 @@ abstract class Puzzle {
     abstract val year: String
     abstract val day: String
 
-    private val part1 get() = try { part1() } catch (e: NotImplementedError) { e.message }
-    private val part2 get() = try { part2() } catch (e: NotImplementedError) { e.message }
+    private val part1 get() = measure { try { part1() } catch (e: NotImplementedError) { e.message } }
+    private val part2 get() = measure { try { part2() } catch (e: NotImplementedError) { e.message } }
 
     protected val String.digits get() = filter(Char::isDigit)
 
     fun print() {
-        print("Year $year, Day $day")
-        print("\n  - Part 1: $part1")
-        print("\n  - Part 2: $part2")
+        println("Year $year, Day $day")
+        println("  - Part 1: $part1")
+        println("  - Part 2: $part2")
         println()
     }
 }

@@ -1,4 +1,4 @@
-package y2021
+package com.emlett.aoc.y2021
 
 import com.emlett.aoc.y2021.Day18.SnailFishNumber
 import org.junit.jupiter.api.*
