@@ -1,9 +1,14 @@
 package com.emlett.aoc.y2021
 
+import com.emlett.aoc.utils.geometry.Point2D
 import kotlin.math.*
 
 typealias LongPair = Pair<Long, Long>
 typealias IntPair = Pair<Int, Int>
+@Deprecated(
+    message = "Use Point2D instead",
+    replaceWith = ReplaceWith("Point2D", "com.emlett.aoc.utils.geometry.Point2D")
+)
 typealias Point = Pair<Int, Int>
 
 val Point.x: Int get() = first
@@ -30,18 +35,22 @@ val Point.adjacentPointsDiagonal: Set<Point>
 
 infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + other.y)
 
-fun Set<Point>.min(): Point = minByOrNull { it.x + it.y } ?: throw NoSuchElementException()
-fun Set<Point>.max(): Point = maxByOrNull { it.x + it.y } ?: throw NoSuchElementException()
+fun Collection<Point2D>.minOrNull(): Point2D? = minByOrNull { it.x + it.y }
+fun Collection<Point2D>.maxOrNull(): Point2D? = maxByOrNull { it.x + it.y }
+
+fun Collection<Point>.min(): Point2D = minOrNull() ?: throw NoSuchElementException()
+fun Collection<Point>.max(): Point2D = maxOrNull() ?: throw NoSuchElementException()
 
 data class Line(val a: Point, val b: Point)
 
-val Line.points: Set<Point> get() {
-    val dx = (b.x - a.x).sign
-    val dy = (b.y - a.y).sign
-    val steps = max(abs(a.x - b.x), abs(a.y - b.y))
+val Line.points: Set<Point>
+    get() {
+        val dx = (b.x - a.x).sign
+        val dy = (b.y - a.y).sign
+        val steps = max(abs(a.x - b.x), abs(a.y - b.y))
 
-    return List(steps + 1) { Point(a.x + (dx * it), a.y + (dy * it)) }.toSet()
-}
+        return List(steps + 1) { Point(a.x + (dx * it), a.y + (dy * it)) }.toSet()
+    }
 
 fun <T : Comparable<T>> Iterable<T>.min() = minByOrNull { it } ?: throw NoSuchElementException()
 fun <T : Comparable<T>> Iterable<T>.max() = maxByOrNull { it } ?: throw NoSuchElementException()
