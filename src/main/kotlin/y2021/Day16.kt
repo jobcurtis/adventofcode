@@ -102,11 +102,13 @@ object Day16 : Year2021() {
                     childrenInput = childrenInput.drop(child.length)
                 }
 
-                return Operator(version = version.toInt(2),
+                return Operator(
+                    version = version.toInt(2),
                     type = type.toInt(2),
                     length = length,
                     input = input.take(length),
-                    children = children)
+                    children = children
+                )
             }
 
             fun parse1(input: String): Operator {
@@ -118,11 +120,13 @@ object Day16 : Year2021() {
                 }
                 val length = 7 + 11 + children.sumOf { it.length }
 
-                return Operator(version = version.toInt(2),
+                return Operator(
+                    version = version.toInt(2),
                     type = type.toInt(2),
                     length = length,
                     input = input.take(length),
-                    children = children)
+                    children = children
+                )
             }
         }
     }

@@ -12,7 +12,8 @@ object Day20 : Year2021() {
         .mapValues { (k, _) ->
             k.gridAround.map { getValue(it) }.joinToString("").toInt(2).let { algorithm[it] }
         }.let {
-            val default = if (algorithm.first() != 0 && getValue(Int.MIN_VALUE to Int.MIN_VALUE) == algorithm.first()) algorithm.last() else algorithm.first()
+            val default =
+                if (algorithm.first() != 0 && getValue(Int.MIN_VALUE to Int.MIN_VALUE) == algorithm.first()) algorithm.last() else algorithm.first()
             it.withDefault { default }
         }
 

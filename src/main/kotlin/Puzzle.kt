@@ -15,8 +15,23 @@ abstract class Puzzle {
     abstract val year: String
     abstract val day: String
 
-    private val part1 get() = measure { try { part1() } catch (e: NotImplementedError) { e.message } }
-    private val part2 get() = measure { try { part2() } catch (e: NotImplementedError) { e.message } }
+    private val part1
+        get() = measure {
+            try {
+                part1()
+            } catch (e: NotImplementedError) {
+                e.message
+            }
+        }
+
+    private val part2
+        get() = measure {
+            try {
+                part2()
+            } catch (e: NotImplementedError) {
+                e.message
+            }
+        }
 
     protected val String.digits get() = filter(Char::isDigit)
 
