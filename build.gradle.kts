@@ -27,8 +27,6 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(KotlinX.serialization.json)
     implementation("org.jetbrains.kotlinx:kotlinx-benchmark-runtime:_")
-
-    testImplementation(Kotlin.test.junit5)
 }
 
 tasks {
@@ -37,10 +35,6 @@ tasks {
             freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
             freeCompilerArgs += "-opt-in=kotlin.time.ExperimentalTime"
         }
-    }
-
-    withType<Test> {
-        useJUnitPlatform()
     }
 
     wrapper {
