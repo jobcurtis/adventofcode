@@ -2,11 +2,12 @@ package com.emlett.aoc
 
 import com.emlett.aoc.utils.*
 import java.io.*
+import java.net.URL
 
 abstract class Puzzle {
-    private val file: File by lazy { getInput(this) }
-    val lines by lazy { file.readLines() }
-    val text by lazy { file.readText().trim() }
+    private val url: URL by lazy { getInput(this) }
+    val lines by lazy { url.readText().trim().split('\n') }
+    val text by lazy { url.readText().trim() }
     val integers by lazy { lines.map(String::toInt) }
 
     abstract fun part1(): Any
@@ -39,6 +40,5 @@ abstract class Puzzle {
         println("Year $year, Day $day")
         println("  - Part 1: $part1")
         println("  - Part 2: $part2")
-        println()
     }
 }
