@@ -35,11 +35,11 @@ val Point.adjacentPointsDiagonal: Set<Point>
 
 infix operator fun Point.plus(other: Point) = (this.x + other.x) to (this.y + other.y)
 
-fun Collection<Point2D>.minOrNull(): Point2D? = minByOrNull { it.x + it.y }
-fun Collection<Point2D>.maxOrNull(): Point2D? = maxByOrNull { it.x + it.y }
+fun Collection<Point>.minOrNull(): Point? = minByOrNull { it.x + it.y }
+fun Collection<Point>.maxOrNull(): Point? = maxByOrNull { it.x + it.y }
 
-fun Collection<Point>.min(): Point2D = minOrNull() ?: throw NoSuchElementException()
-fun Collection<Point>.max(): Point2D = maxOrNull() ?: throw NoSuchElementException()
+fun Collection<Point>.min(): Point = minOrNull() ?: throw NoSuchElementException()
+fun Collection<Point>.max(): Point = maxOrNull() ?: throw NoSuchElementException()
 
 data class Line(val a: Point, val b: Point)
 

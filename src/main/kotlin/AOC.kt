@@ -1,12 +1,13 @@
 package com.emlett.aoc
 
 import java.io.*
+import java.net.URL
 
 private val classloader = {}::class.java.classLoader!!
 
-fun getInput(puzzle: Puzzle): File {
+fun getInput(puzzle: Puzzle): URL {
     val filename = puzzle.run { "Year$year/Day$day.txt" }
-    return classloader.getResource(filename)?.path?.let(::File) ?: throw FileNotFoundException(filename)
+    return classloader.getResource(filename) ?: throw FileNotFoundException(filename)
 }
 
 fun getPuzzle(year: String, day: String): Puzzle {

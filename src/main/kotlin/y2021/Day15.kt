@@ -1,42 +1,13 @@
 package com.emlett.aoc.y2021
 
-import com.emlett.aoc.utils.geometry.Point2D
 import java.util.*
 
-/*
- * ┌────────────────┐                      ┌─────────────────┐
- * │ User           │                      │                 │
- * ├────────────────┤                      │    Something    │
- * │ +username      │                      │      else       │
- * │ +password      │ 1..1            1..* │      here       │
- * ├────────────────┤◄────────────────────►│                 │
- * │ +getUsername() │                      │                 │
- * │ +getPassword() │                      │                 │
- * └────────────────┘                      └─────────────────┘
- *
- *                                                        |   | || ||| || |||  |
- *              |                                         |   ||||||||||||||| ||
- *            |||||                                        ||||           |||||
- *          |||||||||                                      ||                ||   ||
- *        |||||||||||                             ||||||| |    ||||  ||||      |||||
- *    ||||||||||||||||||                          |      ||    ||||  ||||      || ||
- *     |||||||||||||| || |||                      || || ||                      | |||
- *      || |||||||||||||  ||| ||                   |||| |           |            ||||
- *        ||||||||||||||||||||||                      |||          ||            |
- *          ||||||||||||||||||                         |      |    ||    |      ||
- *         ||||||||||||||||||                          |       ||       ||      |
- *         |||||||||||||||||                           ||      ||||||||||      ||
- *          |||  ||||||||||                             |||                   ||
- *          |||  |||||||||                                |||||             |||
- *      |||||||    |||||                                       ||||||||||||||
- *     ||||||||    |||||
- */
 object Day15 : Year2021() {
     private val dimX = lines.first().length
     private val dimY = lines.size
 
     override fun part1() = lines
-        .flatMapIndexed { y, ln -> ln.mapIndexed { x, risk -> Point2D(x, y) to risk.digitToInt() } }
+        .flatMapIndexed { y, ln -> ln.mapIndexed { x, risk -> Point(x, y) to risk.digitToInt() } }
         .toMap()
         .let { input -> dijkstra(input, input.keys.min(), input.keys.max()) }
 
@@ -44,7 +15,7 @@ object Day15 : Year2021() {
         (0 until 5).flatMap { rx ->
             lines.flatMapIndexed { y, ln ->
                 ln.mapIndexed { x, risk ->
-                    Point2D(
+                    Point(
                         x + (rx * dimX),
                         y + (ry * dimY)
                     ) to (risk.digitToInt() + rx + ry).let { if (it > 9) it.mod(9) else it }
@@ -55,10 +26,10 @@ object Day15 : Year2021() {
         .toMap()
         .let { input -> dijkstra(input, input.keys.min(), input.keys.max()) }
 
-    private fun dijkstra(map: Map<Point2D, Int>, start: Point2D, end: Point2D): Int {
-        val weights: MutableMap<Point2D, Int> = mutableMapOf(start to 0).withDefault { Int.MAX_VALUE }
+    private fun dijkstra(map: Map<Point, Int>, start: Point, end: Point): Int {
+        val weights: MutableMap<Point, Int> = mutableMapOf(start to 0).withDefault { Int.MAX_VALUE }
         val visited = mutableSetOf(start)
-        val next = PriorityQueue<Point2D> { l, r -> weights.getValue(l).compareTo(weights.getValue(r)) }
+        val next = PriorityQueue<Point> { l, r -> weights.getValue(l).compareTo(weights.getValue(r)) }
             .apply { add(start) }
 
         while (next.isNotEmpty()) {

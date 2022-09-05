@@ -34,6 +34,7 @@ tasks {
         kotlinOptions {
             freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
             freeCompilerArgs += "-opt-in=kotlin.time.ExperimentalTime"
+            freeCompilerArgs += "-opt-in=kotlin.ExperimentalUnsignedTypes"
         }
     }
 
