@@ -1,7 +1,8 @@
 package com.emlett.aoc.y2021
 
-import com.emlett.aoc.utils.geometry.Point2D
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.sign
 
 typealias LongPair = Pair<Long, Long>
 typealias IntPair = Pair<Int, Int>

@@ -1,15 +1,11 @@
 @file:Suppress("SuspiciousCollectionReassignment")
 
-import kotlinx.benchmark.gradle.*
-import org.gradle.kotlin.dsl.benchmark
-import org.jetbrains.kotlin.gradle.tasks.*
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jetbrains.kotlin.plugin.allopen")
-    id("org.jetbrains.kotlinx.benchmark")
 }
 
 group = "com.emlett"
@@ -26,42 +22,31 @@ dependencies {
     implementation(Kotlin.stdlib)
     implementation(kotlin("reflect"))
     implementation(KotlinX.serialization.json)
-    implementation("org.jetbrains.kotlinx:kotlinx-benchmark-runtime:_")
+
+    implementation(libs.kotlinx.coroutines)
+
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.kotest.property)
+    testImplementation(libs.kotest.datatest)
 }
 
 tasks {
     withType<KotlinCompile> {
         kotlinOptions {
+            jvmTarget = "17"
             freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
             freeCompilerArgs += "-opt-in=kotlin.time.ExperimentalTime"
             freeCompilerArgs += "-opt-in=kotlin.ExperimentalUnsignedTypes"
         }
     }
 
+    test {
+        useJUnitPlatform()
+    }
+
     wrapper {
-        gradleVersion = "7.3.2"
-    }
-}
-
-allOpen {
-    annotation("org.openjdk.jmh.annotations.State")
-}
-
-benchmark {
-    targets {
-        register("main") {
-            this as JvmBenchmarkTarget
-            jmhVersion = "1.21"
-        }
-    }
-
-    configurations {
-        named("main") {
-            warmups = 2
-            iterations = 5
-            iterationTime = 1
-            mode = "AverageTime"
-            outputTimeUnit = "ms"
-        }
+        gradleVersion = "7.5.1"
     }
 }
