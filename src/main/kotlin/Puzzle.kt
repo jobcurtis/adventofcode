@@ -1,14 +1,14 @@
 package com.emlett.aoc
 
-import com.emlett.aoc.utils.*
-import java.io.*
+import com.emlett.aoc.utils.measure
+import kotlinx.coroutines.runBlocking
 import java.net.URL
 
 abstract class Puzzle {
     private val url: URL by lazy { getInput(this) }
-    val lines by lazy { url.readText().trim().split('\n') }
-    val text by lazy { url.readText().trim() }
-    val integers by lazy { lines.map(String::toInt) }
+    protected open val lines by lazy { url.readText().trim().split('\n') }
+    protected open val text by lazy { url.readText().trim() }
+    protected open val integers by lazy { lines.map(String::toInt) }
 
     abstract fun part1(): Any
     abstract fun part2(): Any

@@ -1,7 +1,7 @@
 package com.emlett.aoc.y2021
 
 object Day08 : Year2021() {
-    val input = lines.map { it.split('|') }
+    private val input = lines.map { it.split('|') }
         .map { it.map { it.trim().split(' ') } }
         .map { it.map { it.map(String::toCharArray).map(CharArray::sortedArray) } }
         .map { (signal, output) -> signal to output }
