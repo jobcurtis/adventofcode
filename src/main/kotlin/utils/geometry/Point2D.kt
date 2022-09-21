@@ -1,6 +1,8 @@
 package com.emlett.aoc.utils.geometry
 
 import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.sqrt
 
 data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
     override fun compareTo(other: Point2D) = when {
@@ -12,8 +14,21 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
     override fun toString() = "($x, $y)"
 
     fun manhattanDistanceTo(other: Point2D) = abs(this.x - other.x) + abs(this.y - other.y)
+    fun euclideanDistanceTo(other: Point2D) = sqrt(((this.x - other.x).sqr + (this.y - other.y).sqr).toDouble())
+
+    fun angle(other: Point2D) = atan2((other.x - this.x).toDouble(), (other.y - this.y).toDouble())
+
+    private val Int.sqr get() = this * this
 
     companion object {
         val zero = Point2D(0, 0)
     }
+
+    infix operator fun plus(other: Point2D) = Point2D(this.x + other.x, this.y + other.y)
+
+    val adjacentPointsDiagonal: Set<Point2D>
+        get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
+            .map { (x, y) -> Point2D(x, y) }
+            .map { diff -> this + diff }
+            .toSet()
 }
