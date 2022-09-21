@@ -25,6 +25,12 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
     }
 
     infix operator fun plus(other: Point2D) = Point2D(this.x + other.x, this.y + other.y)
+    infix operator fun plus(direction: Direction) = when (direction) {
+        Direction.NORTH -> copy(y = y + 1)
+        Direction.EAST -> copy(x = x + 1)
+        Direction.SOUTH -> copy(y = y - 1)
+        Direction.WEST -> copy(x = x - 1)
+    }
 
     val adjacentPointsDiagonal: Set<Point2D>
         get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
