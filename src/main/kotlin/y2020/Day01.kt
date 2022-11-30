@@ -1,14 +1,20 @@
 package com.emlett.aoc.y2020
 
-import com.emlett.aoc.utils.*
-
 object Day01 : Year2020() {
     private const val target = 2020
 
-    override fun part1() = integers.first { target - it in integers }.let { (2020 - it) * it }
+    override fun part1() = integers.findTwoParts(target)!!
+    override fun part2() = integers.findThreeParts(target)!!
 
-    override fun part2() = integers.sorted()
-        .combinations(3)
-        .first { (a, b, c) -> a + b + c == target }
-        .let { (a, b, c) -> a * b * c }
+    private fun Collection<Int>.findTwoParts(total: Int) =
+        this.firstOrNull { this.contains(total - it) }
+            ?.let { it to total - it }
+
+    private fun Collection<Int>.findThreeParts(total: Int): Triple<Int, Int, Int>? {
+        for (i in this) {
+            val twoParts = this.findTwoParts(total - i) ?: continue
+            return Triple(i, twoParts.first, twoParts.second)
+        }
+        return null
+    }
 }
