@@ -1,6 +1,8 @@
 package com.emlett.aoc.y2022
 
 object Day01 : Year2022() {
-    override fun part1() = TODO()
-    override fun part2() = TODO()
+    private val elves = text.split("\n\n").map { it.lines().mapNotNull(String::toIntOrNull).sum() }.sortedDescending()
+
+    override fun part1() = elves.first()
+    override fun part2() = elves.take(3).sum()
 }
