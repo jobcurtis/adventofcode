@@ -1,7 +1,6 @@
 package com.emlett.aoc
 
 import com.emlett.aoc.utils.measure
-import kotlinx.coroutines.runBlocking
 import java.net.URL
 
 abstract class Puzzle {
@@ -9,6 +8,7 @@ abstract class Puzzle {
     protected open val lines by lazy { url.readText().trim().split('\n') }
     protected open val text by lazy { url.readText().trim() }
     protected open val integers by lazy { lines.map(String::toInt) }
+    protected open val rawtext by lazy { url.readText() }
 
     abstract fun part1(): Any
     abstract fun part2(): Any
