@@ -37,4 +37,10 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
             .map { (x, y) -> Point2D(x, y) }
             .map { diff -> this + diff }
             .toSet()
+
+    val adjacentPoints: Set<Point2D>
+        get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)
+            .map { (x, y) -> Point2D(x, y) }
+            .map { diff -> this + diff }
+            .toSet()
 }
