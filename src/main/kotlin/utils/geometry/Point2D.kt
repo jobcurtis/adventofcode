@@ -3,6 +3,9 @@ package com.emlett.aoc.utils.geometry
 import kotlin.math.*
 
 data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
+
+    constructor(x: String, y: String) : this(x.toInt(), y.toInt())
+
     override fun compareTo(other: Point2D) = when {
         this.x == other.x && this.y == other.y -> 0
         this.x < other.x || this.y < other.y -> -1
