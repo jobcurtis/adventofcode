@@ -1,8 +1,6 @@
 package com.emlett.aoc.utils.geometry
 
-import kotlin.math.abs
-import kotlin.math.atan2
-import kotlin.math.sqrt
+import kotlin.math.*
 
 data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
     override fun compareTo(other: Point2D) = when {
@@ -17,6 +15,15 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
     fun euclideanDistanceTo(other: Point2D) = sqrt(((this.x - other.x).sqr + (this.y - other.y).sqr).toDouble())
 
     fun angle(other: Point2D) = atan2((other.x - this.x).toDouble(), (other.y - this.y).toDouble())
+
+    fun lineTo(other: Point2D): List<Point2D> {
+        require(this != other) { "$this must not equal $other" }
+        return when {
+            this.x == other.x -> (min(this.y, other.y)..max(this.y, other.y)).map { y -> Point2D(this.x, y) }
+            this.y == other.y -> (min(this.x, other.x)..max(this.x, other.x)).map { x -> Point2D(x, this.y) }
+            else -> error("Points must have a common axis")
+        }
+    }
 
     private val Int.sqr get() = this * this
 
