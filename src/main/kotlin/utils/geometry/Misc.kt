@@ -2,6 +2,8 @@ package com.emlett.aoc.utils.geometry
 
 import kotlin.math.abs
 
+fun pt(x: Int, y: Int) = Point2D(x, y)
+
 fun plot(points: Collection<Point2D>, invertY: Boolean = true, invertX: Boolean = false): String = buildString {
     val (minY, maxY) = points.minOf { it.y } - 1 to points.maxOf { it.y } + 1
     val (minX, maxX) = points.minOf { it.x } - 1 to points.maxOf { it.x } + 1
