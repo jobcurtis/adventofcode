@@ -1,12 +1,12 @@
 package com.emlett.aoc
 
-import java.io.*
+import java.io.FileNotFoundException
 import java.net.URL
 
 private val classloader = {}::class.java.classLoader!!
 
 fun getInput(puzzle: Puzzle): URL {
-    val filename = puzzle.run { "Year$year/Day$day.txt" }
+    val filename = puzzle.run { "y$year/Day$day.txt" }
     return classloader.getResource(filename) ?: throw FileNotFoundException(filename)
 }
 
