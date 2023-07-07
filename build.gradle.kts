@@ -1,9 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.utils.notCompatibleWithConfigurationCacheCompat
 
 plugins {
     application
-    kotlin("jvm")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.emlett"
@@ -17,38 +17,29 @@ application {
 }
 
 dependencies {
-    implementation(Kotlin.stdlib)
-    implementation(kotlin("reflect"))
-    implementation(KotlinX.serialization.json)
-    implementation(KotlinX.coroutines.core)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.coroutines.core)
 
-    testImplementation(Testing.Kotest.runner.junit5)
-    testImplementation(Testing.Kotest.assertions.core)
-    testImplementation(Testing.Kotest.property)
-    testImplementation("io.kotest:kotest-framework-datatest:_")
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.kotest.property)
+    testImplementation(libs.kotest.framework.datatest)
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(20)
+
+    compilerOptions {
+        progressiveMode = true
+    }
 }
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "17"
-            freeCompilerArgs = freeCompilerArgs + listOf(
-                "-opt-in=kotlin.ExperimentalStdlibApi",
-                "-opt-in=kotlin.time.ExperimentalTime",
-                "-opt-in=kotlin.ExperimentalUnsignedTypes"
-            )
-        }
-    }
+tasks.test {
+    useJUnitPlatform()
+}
 
-    test {
-        useJUnitPlatform()
-    }
-
-    wrapper {
-        gradleVersion = "7.6"
-    }
+tasks.refreshVersions {
+    notCompatibleWithConfigurationCacheCompat("")
 }
