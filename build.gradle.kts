@@ -1,7 +1,8 @@
-import org.jetbrains.kotlin.gradle.utils.notCompatibleWithConfigurationCacheCompat
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
     application
+    alias(libs.plugins.versions)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
 }
@@ -29,7 +30,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(20)
+    jvmToolchain(21)
 
     compilerOptions {
         progressiveMode = true
@@ -40,6 +41,12 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.refreshVersions {
-    notCompatibleWithConfigurationCacheCompat("")
+tasks.withType<DependencyUpdatesTask> {
+    fun isStable(version: String) = listOf("RELEASE", "FINAL", "GA").any { it in version.uppercase() }
+    fun isSemver(version: String) = Regex("""^[0-9.]+$""").matches(version)
+    fun isStatic(version: String) = isStable(version) || isSemver(version)
+
+    rejectVersionIf {
+        !isStatic(candidate.version) && isStatic(currentVersion)
+    }
 }
