@@ -1,6 +1,8 @@
 package com.emlett.aoc.utils.geometry
 
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.sqrt
 
 data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
 
@@ -19,11 +21,13 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
 
     fun angle(other: Point2D) = atan2((other.x - this.x).toDouble(), (other.y - this.y).toDouble())
 
-    fun lineTo(other: Point2D): List<Point2D> {
-        require(this != other) { "$this must not equal $other" }
+    fun lineTo(dest: Point2D): List<Point2D> {
+        require(this != dest) { "$this must not equal $dest" }
         return when {
-            this.x == other.x -> (min(this.y, other.y)..max(this.y, other.y)).map { y -> Point2D(this.x, y) }
-            this.y == other.y -> (min(this.x, other.x)..max(this.x, other.x)).map { x -> Point2D(x, this.y) }
+            this.x == dest.x && this.y < dest.y -> (this.y.rangeTo(dest.y)).map { y -> Point2D(this.x, y) }
+            this.x == dest.x && this.y > dest.y -> (this.y.downTo(dest.y)).map { y -> Point2D(this.x, y) }
+            this.y == dest.y && this.x < dest.x -> (this.x.rangeTo(dest.x)).map { x -> Point2D(x, this.y) }
+            this.y == dest.y && this.x > dest.x -> (this.x.downTo(dest.x)).map { x -> Point2D(x, this.y) }
             else -> error("Points must have a common axis")
         }
     }
@@ -40,6 +44,13 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
         Direction.EAST -> copy(x = x + 1)
         Direction.SOUTH -> copy(y = y - 1)
         Direction.WEST -> copy(x = x - 1)
+    }
+
+    fun move(direction: Direction, distance: Int) = when (direction) {
+        Direction.NORTH -> copy(y = y + distance)
+        Direction.EAST -> copy(x = x + distance)
+        Direction.SOUTH -> copy(y = y - distance)
+        Direction.WEST -> copy(x = x - distance)
     }
 
     val adjacentPointsDiagonal: Set<Point2D>
