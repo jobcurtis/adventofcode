@@ -34,6 +34,7 @@ kotlin {
 
     compilerOptions {
         progressiveMode = true
+        freeCompilerArgs.add("-Xcontext-receivers")
     }
 }
 
