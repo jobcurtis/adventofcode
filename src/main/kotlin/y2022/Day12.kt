@@ -1,12 +1,9 @@
 package com.emlett.aoc.y2022
 
 import com.emlett.aoc.utils.geometry.Point2D
-import com.emlett.aoc.utils.input.asGrid
 import java.util.*
 
 object Day12 : Year2022() {
-    private val grid = asGrid(text)
-
     private val start = grid.filterValues { it == 'S' }.keys.first()
     private val end = grid.filterValues { it == 'E' }.keys.first()
 
