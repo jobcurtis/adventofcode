@@ -1,8 +1,8 @@
 package com.emlett.aoc
 
 import com.emlett.aoc.utils.geometry.Point2D
-import com.emlett.aoc.utils.measure
 import java.net.URL
+import kotlin.time.measureTimedValue
 
 abstract class Puzzle {
     private val url: URL by lazy { getInput(this) }
@@ -20,29 +20,31 @@ abstract class Puzzle {
     abstract val year: String
     abstract val day: String
 
-    private val part1
-        get() = measure {
+    private val part1 by lazy {
+        measureTimedValue {
             try {
                 part1()
             } catch (e: NotImplementedError) {
                 e.message
             }
         }
+    }
 
-    private val part2
-        get() = measure {
+    private val part2 by lazy {
+        measureTimedValue {
             try {
                 part2()
             } catch (e: NotImplementedError) {
                 e.message
             }
         }
+    }
 
     protected val String.digits get() = filter(Char::isDigit)
 
     fun print() {
         println("Year $year, Day $day")
-        println("  - Part 1: $part1")
-        println("  - Part 2: $part2")
+        println("  - Part 1: ${part1.value} in ${part1.duration}")
+        println("  - Part 2: ${part2.value} in ${part2.duration}")
     }
 }
