@@ -55,3 +55,6 @@ fun <T> List<T>.splitBy(predicate: (T) -> Boolean): List<List<T>> {
 
     return splits.chunked(2) { (from, to) -> slice(from..to) }
 }
+
+val <T> List<T>.head: T inline get() = first()
+val <T> List<T>.tail: T inline get() = last()

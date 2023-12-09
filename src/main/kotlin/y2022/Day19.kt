@@ -1,10 +1,10 @@
 package com.emlett.aoc.y2022
 
-import com.emlett.aoc.utils.input.ints
+import com.emlett.aoc.utils.input.integers
 
 object Day19 : Year2022() {
 
-    private val blueprints = lines.map(String::ints).map { ints ->
+    private val blueprints = lines.map(String::integers).map { ints ->
         Blueprint(
             num = ints[0],
             ore = Resources(ore = ints[1]),
