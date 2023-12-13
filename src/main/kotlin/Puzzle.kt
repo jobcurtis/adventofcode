@@ -1,6 +1,5 @@
 package com.emlett.aoc
 
-import com.emlett.aoc.utils.geometry.Point2D
 import java.net.URL
 import kotlin.time.measureTimedValue
 
@@ -10,9 +9,6 @@ abstract class Puzzle {
     protected open val text by lazy { rawtext.trim() }
     protected open val lines by lazy { text.split('\n') }
     protected open val integers by lazy { lines.map(String::toInt) }
-    protected open val grid by lazy {
-        lines.flatMapIndexed { y: Int, r: String -> r.mapIndexed { x, c -> Point2D(x, y) to c } }.toMap()
-    }
 
     abstract fun part1(): Any
     abstract fun part2(): Any
