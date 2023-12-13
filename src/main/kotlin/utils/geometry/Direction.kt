@@ -18,4 +18,12 @@ enum class Direction {
             SOUTH -> EAST
             WEST -> SOUTH
         }
+
+    val flip
+        get() = when (this) {
+            NORTH -> SOUTH
+            EAST -> WEST
+            SOUTH -> NORTH
+            WEST -> EAST
+        }
 }

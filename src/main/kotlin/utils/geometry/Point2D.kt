@@ -53,6 +53,14 @@ data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
         Direction.WEST -> copy(x = x - distance)
     }
 
+    fun directionTo(other: Point2D) = when {
+        this.x > other.x && this.y == other.y -> Direction.WEST
+        this.x < other.x && this.y == other.y -> Direction.EAST
+        this.y > other.y && this.x == other.x -> Direction.SOUTH
+        this.y < other.y && this.x == other.x -> Direction.NORTH
+        else -> throw IllegalArgumentException("No cardinal direction from $this to $other")
+    }
+
     val adjacentPointsDiagonal: Set<Point2D>
         get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
             .map { (x, y) -> Point2D(x, y) }

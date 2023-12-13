@@ -4,6 +4,7 @@ import com.emlett.aoc.utils.geometry.Point2D
 import com.emlett.aoc.utils.splitBy
 
 object Day03 : Year2023() {
+    private val grid by lazy { lines.flatMapIndexed { y, r -> r.mapIndexed { x, c -> Point2D(x, y) to c } }.toMap() }
     private val nums by lazy {
         grid
             .toList()

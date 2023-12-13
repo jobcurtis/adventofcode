@@ -4,6 +4,7 @@ import com.emlett.aoc.utils.geometry.Point2D
 import java.util.*
 
 object Day12 : Year2022() {
+    private val grid = lines.flatMapIndexed { y, r -> r.mapIndexed { x, c -> Point2D(x, y) to c } }.toMap()
     private val start = grid.filterValues { it == 'S' }.keys.first()
     private val end = grid.filterValues { it == 'E' }.keys.first()
 
