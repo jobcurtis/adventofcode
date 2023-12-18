@@ -1,25 +1,35 @@
 package com.emlett.aoc.y2023
 
-import kotlin.math.pow
+import com.emlett.aoc.utils.head
 
 object Day12 : Year2023() {
     private val input by lazy { lines.map { line -> line.split(' ') } }
 
-    override fun part1() = input
-        .map { (row, groups) -> row to groups.split(',').map(String::toInt) }
-        .sumOf { (row, groups) -> permutations(row).count { isValid(it, groups) } }
+    override fun part1() = input.sumOf { (row, groups) -> calculate(row, groups, 1) }
+    override fun part2() = input.sumOf { (row, groups) -> calculate(row, groups, 5) }
 
-    override fun part2() = TODO()
+    private fun calculate(row: String, groups: String, repeated: Int) = possibilities(
+        row = Array(repeated) { row }.joinToString("?"),
+        groups = Array(repeated) { groups }.joinToString(",").split(',').map(String::toInt)
+    )
 
-    private fun isValid(row: String, groups: List<Int>): Boolean {
-        return row.split('.').filterNot(String::isEmpty).map(String::length) == groups
-    }
+    private val cache = mutableMapOf<Pair<String, List<Int>>, Long>()
+    private fun possibilities(row: String, groups: List<Int>): Long = cache.getOrPut(row to groups) {
+        if (groups.isEmpty()) return@getOrPut if ('#' !in row) 1 else 0
+        if (row.isEmpty()) return@getOrPut 0
 
-    private fun permutations(line: String): Sequence<String> {
-        val wildcards = line.count { it == '?' }
-        return (0..<2.0.pow(wildcards).toInt())
-            .asSequence()
-            .map { it.toString(2).padStart(wildcards, '0') }
-            .map { it.fold(line) { acc: String, c: Char -> acc.replaceFirst('?', if (c == '0') '#' else '.') } }
+        val group = row.take(groups.head)
+
+        return@getOrPut when (row.first()) {
+            '.' -> possibilities(row.drop(1), groups)
+            '?' -> possibilities(row.replaceFirst('?', '.'), groups) + possibilities(row.replaceFirst('?', '#'), groups)
+            else -> when {
+                group.length != groups.head -> 0
+                group.any { it != '#' && it != '?' } -> 0
+                group.length == row.length -> if (groups.size == 1) 1 else 0
+                row[groups.head] in setOf('.', '?') -> possibilities(row.drop(groups.head + 1), groups.drop(1))
+                else -> 0
+            }
+        }
     }
 }
