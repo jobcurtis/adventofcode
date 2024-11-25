@@ -1,4 +1,4 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import java.time.LocalDate
 
 plugins {
     application
@@ -21,12 +21,8 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.coroutines.core)
 
-    testImplementation(libs.kotest.runner.junit5)
-    testImplementation(libs.kotest.assertions.core)
-    testImplementation(libs.kotest.property)
-    testImplementation(libs.kotest.framework.datatest)
+    testImplementation(libs.kotlin.test)
 }
 
 kotlin {
@@ -42,12 +38,27 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<DependencyUpdatesTask> {
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     fun isStable(version: String) = listOf("RELEASE", "FINAL", "GA").any { it in version.uppercase() }
     fun isSemver(version: String) = Regex("""^[0-9.]+$""").matches(version)
     fun isStatic(version: String) = isStable(version) || isSemver(version)
 
     rejectVersionIf {
         !isStatic(candidate.version) && isStatic(currentVersion)
+    }
+
+    gradleReleaseChannel = "current"
+}
+
+tasks.withType<JavaExec> {
+    val aocSession: String by project
+
+    systemProperty("aoc.session", aocSession)
+
+    @Suppress("UNNECESSARY_SAFE_CALL")
+    if (args?.isEmpty() == true) {
+        with(LocalDate.now()) {
+            args(year, dayOfMonth)
+        }
     }
 }

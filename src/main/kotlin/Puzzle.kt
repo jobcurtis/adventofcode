@@ -1,11 +1,9 @@
 package com.emlett.aoc
 
-import java.net.URL
 import kotlin.time.measureTimedValue
 
 abstract class Puzzle {
-    private val url: URL by lazy { getInput(this) }
-    protected open val rawtext by lazy { url.readText() }
+    protected open val rawtext by lazy { getInput(this) }
     protected open val text by lazy { rawtext.trim() }
     protected open val lines by lazy { text.split('\n') }
     protected open val integers by lazy { lines.map(String::toInt) }
