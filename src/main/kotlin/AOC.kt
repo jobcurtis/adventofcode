@@ -1,13 +1,20 @@
 package com.emlett.aoc
 
-import java.io.FileNotFoundException
-import java.net.URL
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse.BodyHandlers
+import kotlin.io.path.*
 
-private val classloader = {}::class.java.classLoader!!
+fun getInput(puzzle: Puzzle): String {
+    val path = with(puzzle) { Path("src/main/kotlin/y$year/Day$day.txt") }
 
-fun getInput(puzzle: Puzzle): URL {
-    val filename = puzzle.run { "y$year/Day$day.txt" }
-    return classloader.getResource(filename) ?: throw FileNotFoundException(filename)
+    return when {
+        path.exists() -> path.readText()
+        else -> with(puzzle) { downloadInput(year.toInt(), day.toInt()) }
+            .also { path.parent.createDirectories() }
+            .also { input -> path.writeText(input) }
+    }
 }
 
 fun getPuzzle(year: String, day: String): Puzzle {
@@ -20,4 +27,28 @@ fun getPuzzle(year: String, day: String): Puzzle {
 
 fun main(args: Array<String>) = args.let { (year, day) ->
     getPuzzle(year, day).print()
+}
+
+fun downloadInput(year: Int, day: Int): String {
+    val uri = URI.create("https://adventofcode.com/$year/day/$day/input")
+    val session = System.getProperty("aoc.session")
+
+    require(session != null && session.isNotBlank()) {
+        "Missing system property 'aoc.session'"
+    }
+
+    println("Fetching $uri")
+
+    val client = HttpClient.newBuilder().build()
+    val request = HttpRequest
+        .newBuilder(uri)
+        .header("Cookie", "session=$session")
+        .header("User-Agent", "https://github.com/jobcurtis/adventofcode")
+        .build()
+
+    val response = client
+        .send(request, BodyHandlers.ofString())
+        .apply { check(statusCode() == 200) { "${statusCode()} ${body()}" } }
+
+    return response.body()
 }
