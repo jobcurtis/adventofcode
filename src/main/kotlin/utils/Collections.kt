@@ -35,3 +35,9 @@ fun <T> List<T>.splitBy(predicate: (T) -> Boolean): List<List<T>> {
 
 val <T> List<T>.head: T inline get() = first()
 val <T> List<T>.tail: T inline get() = last()
+
+/**
+ * @return A pair containing the most frequent element and its count.
+ * @throws NoSuchElementException if the collection is empty
+ */
+fun <T> Collection<T>.mostFrequent() = groupingBy { it }.eachCount().maxBy { (_, count) -> count }.toPair()

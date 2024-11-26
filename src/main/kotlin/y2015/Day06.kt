@@ -1,9 +1,17 @@
 package com.emlett.aoc.y2015
 
 import com.emlett.aoc.utils.geometry.Point2D
-import java.lang.Integer.max
+import kotlin.math.max
 
 object Day06 : Year2015() {
+
+    private val comparator: Comparator<Point2D> = Comparator { a, b ->
+        return@Comparator when {
+            a.x == b.x && a.y == b.y -> 0
+            a.x < b.x || a.y < b.y -> -1
+            else -> 1
+        }
+    }
 
     private val regex = Regex("""(turn on|turn off|toggle) (\d+),(\d+) through (\d+),(\d+)""")
     private val instructions = lines.mapNotNull(regex::matchEntire).map(MatchResult::groupValues).map(this::parse)
@@ -39,8 +47,8 @@ object Day06 : Year2015() {
     private fun parse(strings: List<String>): Instruction = strings.let { (_, instr, ax, ay, bx, by) ->
         Instruction(
             instr,
-            minOf(Point2D(ax.toInt(), ay.toInt()), Point2D(bx.toInt(), by.toInt())),
-            maxOf(Point2D(ax.toInt(), ay.toInt()), Point2D(bx.toInt(), by.toInt()))
+            listOf(Point2D(ax.toInt(), ay.toInt()), Point2D(bx.toInt(), by.toInt())).minWith(comparator),
+            listOf(Point2D(ax.toInt(), ay.toInt()), Point2D(bx.toInt(), by.toInt())).maxWith(comparator),
         )
     }
 

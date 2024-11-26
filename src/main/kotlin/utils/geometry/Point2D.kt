@@ -4,15 +4,9 @@ import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
-data class Point2D(val x: Int, val y: Int) : Comparable<Point2D> {
+data class Point2D(val x: Int, val y: Int) {
 
     constructor(x: String, y: String) : this(x.toInt(), y.toInt())
-
-    override fun compareTo(other: Point2D) = when {
-        this.x == other.x && this.y == other.y -> 0
-        this.x < other.x || this.y < other.y -> -1
-        else -> 1
-    }
 
     override fun toString() = "($x, $y)"
 
