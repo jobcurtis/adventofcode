@@ -7,7 +7,7 @@ object Day07 : Year2018() {
     val requirements by lazy { instr.groupBy { it.second }.mapValues { (_, reqs) -> reqs.map { it.first }.toSet() } }
 
     override fun part1() = work().joinToString("")
-    override fun part2() = TODO()
+    override fun part2() = part2(workers = 5, cost = { it.code - 4 })
 
     tailrec fun work(completed: Set<Char> = emptySet()): Set<Char> {
         if (completed.size == steps.size) return completed
@@ -19,13 +19,35 @@ object Day07 : Year2018() {
         return work(completed + next)
     }
 
-    override val text = """
-        Step C must be finished before step A can begin.
-        Step C must be finished before step F can begin.
-        Step A must be finished before step B can begin.
-        Step A must be finished before step D can begin.
-        Step B must be finished before step E can begin.
-        Step D must be finished before step E can begin.
-        Step F must be finished before step E can begin.
-    """.trimIndent()
+    fun part2(workers: Int, cost: (Char) -> Int): Int {
+        data class Work(val step: Char, var time: Int)
+
+        var time = 0
+        val remaining = steps.map { Work(it, cost(it)) }.toMutableList()
+        val completed = mutableListOf<Char>()
+        val active = mutableListOf<Work>()
+
+        while (completed.size != steps.size) {
+
+            remaining
+                .filter { it.time > 0 }
+                .filter { (step) -> requirements.getOrDefault(step, emptySet()).all(completed::contains) }
+                .take(workers - active.size)
+                .forEach {
+                    remaining.remove(it)
+                    active.add(it)
+                }
+
+            active.forEach { it.time-- }
+
+            active.filter { it.time == 0 }.forEach {
+                completed.add(it.step)
+                active.remove(it)
+            }
+
+            time += 1
+        }
+
+        return time
+    }
 }

@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlinx.serialization.json)
 
-    testImplementation(libs.kotlin.test)
+    testImplementation(libs.bundles.junit)
 }
 
 kotlin {

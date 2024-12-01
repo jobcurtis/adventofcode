@@ -1,8 +1,7 @@
-package utils
+package com.emlett.aoc.utils
 
-import com.emlett.aoc.utils.*
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class CollectionsKtTest {
 
@@ -58,13 +57,13 @@ class CollectionsKtTest {
     @Test
     fun `should handle list entirely composed of 'split' values`() {
         val result = listOf("", "", "").splitBy(String::isEmpty)
-        assertEquals(emptyList(), result)
+        assertEquals(emptyList<List<String>>(), result)
     }
 
     @Test
     fun `should handle empty list`() {
         val result = emptyList<String>().splitBy(String::isEmpty)
-        assertEquals(emptyList(), result)
+        assertEquals(emptyList<List<String>>(), result)
     }
 
     @Test

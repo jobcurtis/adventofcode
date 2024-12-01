@@ -23,7 +23,7 @@ fun plot(
     invertY: Boolean = true,
     invertX: Boolean = false,
     markers: Boolean = true
-): String = buildString {
+): String = "\n" + buildString {
     val (minY, maxY) = points.keys.minOf { it.y } - 1 to points.keys.maxOf { it.y } + 1
     val (minX, maxX) = points.keys.minOf { it.x } - 1 to points.keys.maxOf { it.x } + 1
     val yRange = (minY..maxY).let { if (invertY) it.reversed() else it }
@@ -41,7 +41,7 @@ fun plot(
             }
         }
     }
-}
+}.trim()
 
 fun area(a: Point2D, b: Point2D) = buildSet {
     for (x in (min(a.x, b.x) until max(a.x, b.x))) {
