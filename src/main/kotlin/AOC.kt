@@ -43,7 +43,7 @@ fun downloadInput(year: Int, day: Int): String {
     val request = HttpRequest
         .newBuilder(uri)
         .header("Cookie", "session=$session")
-        .header("User-Agent", "https://github.com/jobcurtis/adventofcode")
+        .header("User-Agent", "https://github.com/jobcurtis/adventofcode by job.curtis@gmail.com")
         .build()
 
     val response = client
