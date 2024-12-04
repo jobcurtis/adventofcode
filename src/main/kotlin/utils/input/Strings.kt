@@ -9,3 +9,5 @@ fun <T> Regex.extractInts(str: String, block: (List<Int>) -> T) = extract(str) {
 
 fun String.parseGrid(invertY: Boolean = false) =
     lines().flatMapIndexed { y, row -> row.mapIndexed { x, c -> Point2D(x, if (invertY) -y else y) to c } }.toMap()
+
+fun String.clean() = lines().filter(String::isNotBlank).joinToString("\n", prefix = "\n", transform = String::trimEnd)

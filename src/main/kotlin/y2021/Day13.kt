@@ -1,5 +1,7 @@
 package com.emlett.aoc.y2021
 
+import com.emlett.aoc.utils.input.clean
+
 object Day13 : Year2021() {
     private val points = lines.takeWhile(String::isNotBlank)
         .map { it.split(',').map(String::toInt) }
@@ -18,7 +20,7 @@ object Day13 : Year2021() {
                     if (x to y in it) "#" else " "
                 }
             }
-        }
+        }.clean()
 
     private fun Set<Point>.foldAtLine(axis: Char, value: Int): Set<Point> = this.map { (x, y) ->
         when {

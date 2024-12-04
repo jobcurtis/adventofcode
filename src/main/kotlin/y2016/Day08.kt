@@ -1,6 +1,7 @@
 package com.emlett.aoc.y2016
 
 import com.emlett.aoc.utils.geometry.Point2D
+import com.emlett.aoc.utils.input.clean
 import com.emlett.aoc.utils.input.extract
 import java.lang.Math.floorMod
 
@@ -50,5 +51,5 @@ object Day08 : Year2016() {
             }
             append("\n")
         }
-    }
+    }.clean()
 }

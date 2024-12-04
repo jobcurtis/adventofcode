@@ -1,5 +1,7 @@
 package com.emlett.aoc.y2019
 
+import com.emlett.aoc.utils.input.clean
+
 object Day08 : Year2019() {
     private const val width = 25
     private const val height = 6
@@ -14,7 +16,6 @@ object Day08 : Year2019() {
 
     private fun merge(a: List<Int>, b: List<Int>) = a.mapIndexed { i, it -> if (it == 2) b[i] else it }
     private fun List<Int>.print() = buildString {
-        append("Output: \n")
         (0 until height).forEach { i ->
             (0 until width).forEach { j ->
                 when (this@print[(i * width) + j]) {
@@ -26,5 +27,5 @@ object Day08 : Year2019() {
             }
             append('\n')
         }
-    }
+    }.clean()
 }

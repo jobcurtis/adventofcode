@@ -6,12 +6,12 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
 import kotlin.io.path.*
 
-fun getInput(puzzle: Puzzle): String {
-    val path = with(puzzle) { Path("src/main/kotlin/y$year/Day$day.txt") }
+fun getInput(puzzle: Puzzle): String = with(puzzle) {
+    val path = Path("src/main/kotlin/y${year}/Day${day}.txt")
 
-    return when {
+    when {
         path.exists() -> path.readText()
-        else -> with(puzzle) { downloadInput(year.toInt(), day.toInt()) }
+        else -> downloadInput(year.toInt(), day.toInt())
             .also { path.parent.createDirectories() }
             .also { input -> path.writeText(input) }
     }
