@@ -23,14 +23,19 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.bundles.junit)
+    testImplementation(libs.bundles.jqwik)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 kotlin {
     jvmToolchain(21)
 
     compilerOptions {
+        javaParameters = true
         progressiveMode = true
         freeCompilerArgs.add("-Xcontext-receivers")
+        freeCompilerArgs.add("-Xnullability-annotations=@org.jspecify.annotations:strict")
+        freeCompilerArgs.add("-Xemit-jvm-type-annotations")
     }
 }
 
