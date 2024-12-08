@@ -1,6 +1,5 @@
 package com.emlett.aoc
 
-import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
 
 abstract class Puzzle {
@@ -15,16 +14,7 @@ abstract class Puzzle {
     abstract val year: String
     abstract val day: String
 
-    protected open val part1: Any? = null
-    protected open val part2: Any? = null
-
     protected val String.digits get() = filter(Char::isDigit)
-
-    private fun TimedValue<*>.matches(expected: Any?): String = when (expected) {
-        null -> ""
-        value -> "(matches expected result)"
-        else -> "(expected $expected)"
-    }
 
     fun print() {
         println("Year $year, Day $day")
@@ -35,7 +25,7 @@ abstract class Puzzle {
             } catch (e: NotImplementedError) {
                 e.message
             }
-        }.apply { println("  - Part 1: $value in $duration ${matches(part1)}") }
+        }.apply { println("  - Part 1: $value in $duration") }
 
         measureTimedValue {
             try {
@@ -43,6 +33,6 @@ abstract class Puzzle {
             } catch (e: NotImplementedError) {
                 e.message
             }
-        }.apply { println("  - Part 2: $value in $duration ${matches(part2)}") }
+        }.apply { println("  - Part 2: $value in $duration") }
     }
 }

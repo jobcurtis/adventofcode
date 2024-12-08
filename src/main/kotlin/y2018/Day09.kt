@@ -8,10 +8,6 @@ import kotlin.math.absoluteValue
 object Day09 : Year2018() {
     val regex = Regex("""(\d+) players; last marble is worth (\d+) points""")
     val input by lazy { regex.extractInts(text) { (players, marbles) -> players to marbles } }
-
-    override val part1 = 398371L
-    override val part2 = 3212830280L
-
     override fun part1() = input.let { (players, marbles) -> play(players, marbles) }.scores.values.max()
     override fun part2() = input.let { (players, marbles) -> play(players, marbles * 100) }.scores.values.max()
 

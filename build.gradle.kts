@@ -40,7 +40,10 @@ kotlin {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("slow")
+        maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
+    }
 }
 
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
