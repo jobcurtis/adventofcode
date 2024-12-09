@@ -1,47 +1,48 @@
 package com.emlett.aoc.y2024
 
-import java.util.*
-
 object Day09 : Year2024() {
-    override fun part1(): Long {
-        val disk = text
-            .trim()
-            .flatMapIndexed { i, ch -> if (i % 2 == 0) List(ch.digitToInt()) { i / 2 } else List<Int?>(ch.digitToInt()) { null } }
-            .toMutableList()
-        var l = 0
-        var r = disk.size - 1
+    val digits by lazy { text.map { ch -> ch.digitToInt() } }
 
-        while (l < r) if (disk[l] != null) l++ else if (disk[r] == null) r-- else Collections.swap(disk, l, r)
-        return disk.subList(0, l).filterNotNull().foldIndexed(0L) { index, acc, id -> acc + (index * id) }
+    override fun part1(): Long {
+        val drive = digits.flatMapIndexed { i, len -> List(len) { if (i % 2 == 0) i / 2 else null } }.toMutableList()
+
+        var (l, r) = 0 to drive.size - 1
+
+        while (l < r) when {
+            drive[l] != null -> l++
+            drive[r] == null -> r--
+            else -> drive[l] = drive.set(r, drive[l++])
+        }
+
+        return drive.subList(0, l).foldIndexed(0L) { index, acc, id -> acc + (index * id!!) }
     }
 
     override fun part2(): Long {
-        var tried = mutableSetOf<Int>()
-        val disk = text.trim()
-            .mapIndexed { index, ch -> ch.digitToInt() to if (index % 2 == 0) index / 2 else null }
-            .toMutableList()
+        val drive = digits.mapIndexed { i, len -> len to if (i % 2 == 0) i / 2 else null }.toMutableList()
+        val tried = mutableSetOf<Int>()
 
-        for (i in disk.indices.reversed()) {
-            val (len, id) = disk[i]
-            if (id == null) continue
-            if (id !in tried) {
-                tried += id
-                val j = disk.indices.firstOrNull { j -> j < i && disk[j].first >= len && disk[j].second == null }
-                    ?: continue
-                val nlen = disk[j].first
-
-                disk[i] = len to null
-                disk[j] = len to id
-
-                if (nlen != len) {
-                    disk.add(j + 1, nlen - len to null)
-                }
-            }
+        val nextFree = with(IntArray(10)) {
+            fun(len: Int, max: Int): Int? = (this[len]..max)
+                .firstOrNull { j -> drive[j].let { (l, id) -> id == null && l >= len } }
+                ?.also { this[len] = it }
         }
 
-        return disk
+        for (iFile in drive.indices.reversed()) {
+            val (len, id) = drive[iFile]
+
+            if (id == null || !tried.add(id)) continue
+
+            val iFree = nextFree(len, iFile) ?: continue
+            val leftover = drive[iFree].first - len
+
+            drive[iFile] = len to null
+            drive[iFree] = len to id
+
+            if (leftover != 0) drive.add(iFree + 1, leftover to null)
+        }
+
+        return drive
             .flatMap { (len, id) -> List(len) { id } }
             .foldIndexed(0L) { index, acc, id -> if (id == null) acc else acc + (index * id) }
     }
-
 }
