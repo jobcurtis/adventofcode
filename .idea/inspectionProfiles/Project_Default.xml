@@ -1104,6 +1104,7 @@
     <inspection_tool class="ConnectionResource" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
+    <inspection_tool class="ConstPropertyName" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ConstantAssertArgument" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>

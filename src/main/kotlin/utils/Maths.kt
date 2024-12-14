@@ -16,3 +16,25 @@ tailrec fun concat(a: ULong, b: UShort, reduce: UInt = b.toUInt()): ULong {
 }
 
 private const val U_ZERO: UShort = 0u
+
+fun Long.modInverse(m: Long) = toBigInteger().modInverse(m.toBigInteger()).toLong()
+
+fun crt(remainders: LongArray, modulos: LongArray): Long {
+    require(remainders.size == modulos.size) { "Input must be of equal size" }
+    require(modulos.none(0::equals)) { "Modulos must not contain 0" }
+
+    val productM = modulos.reduce(Long::times)
+    var result = 0L
+
+    for (i in remainders.indices) {
+        val ni = productM / modulos[i]
+        result += remainders[i] * ni * ni.modInverse(modulos[i])
+    }
+
+    return result % productM
+}
+
+fun crt(remainders: IntArray, modulos: IntArray): Int = crt(
+    remainders = LongArray(remainders.size) { remainders[it].toLong() },
+    modulos = LongArray(modulos.size) { modulos[it].toLong() },
+).toInt()
