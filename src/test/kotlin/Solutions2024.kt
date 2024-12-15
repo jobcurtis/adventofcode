@@ -18,4 +18,5 @@ class Solutions2024 {
     @Nested inner class Day12 : Solutions(Day12, 1400386, 851994)
     @Nested inner class Day13 : Solutions(Day13, 36954L, 79352015273424L)
     @Nested inner class Day14 : Solutions(Day14, 231019008, 8280)
+    @Nested inner class Day15 : Solutions(Day15, 1511865, 1519991)
 }
