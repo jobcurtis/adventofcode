@@ -41,3 +41,20 @@ val <T> List<T>.tail: T inline get() = last()
  * @throws NoSuchElementException if the collection is empty
  */
 fun <T> Collection<T>.mostFrequent() = groupingBy { it }.eachCount().maxBy { (_, count) -> count }.toPair()
+
+fun <T> List<T>.bisect(low: Int, high: Int, predicate: List<T>.(Int) -> Boolean): T {
+    var low = low
+    var high = high
+
+    while (low < high) {
+        val mid = (low + high) / 2
+
+        if (predicate(mid)) {
+            high = mid
+        } else {
+            low = mid + 1
+        }
+    }
+
+    return this[low - 1]
+}

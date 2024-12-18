@@ -29,3 +29,6 @@ fun <N> ValueGraph<N, Int>.findShortestDistance(initial: Iterable<N>, target: (N
 
     return weights.filterKeys(target).minOf(Map.Entry<N, Int>::value)
 }
+
+fun <N> ValueGraph<N, Int>.findShortestDistanceOrNull(initial: Iterable<N>, target: (N) -> Boolean) =
+    runCatching { findShortestDistance(initial, target) }.getOrNull()
