@@ -23,4 +23,5 @@ class Solutions2024 {
     @Nested inner class Day17 : Solutions(Day17, "1,4,6,1,6,4,3,0,3", 265061364597659L)
     @Nested inner class Day18 : Solutions(Day18, 306, "38,63")
     @Nested inner class Day19 : Solutions(Day19, 313, 666491493769758)
+    @Nested inner class Day20 : Solutions(Day20, 1441, 1021490)
 }
