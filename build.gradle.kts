@@ -27,12 +27,12 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(24)
 
     compilerOptions {
         javaParameters = true
         progressiveMode = true
-        freeCompilerArgs.add("-Xcontext-receivers")
+        freeCompilerArgs.add("-Xcontext-parameters")
         freeCompilerArgs.add("-Xnullability-annotations=@org.jspecify.annotations:strict")
         freeCompilerArgs.add("-Xemit-jvm-type-annotations")
         freeCompilerArgs.add("-Xwhen-guards")

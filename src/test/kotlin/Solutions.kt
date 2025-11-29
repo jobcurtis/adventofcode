@@ -11,6 +11,6 @@ abstract class Solutions(val puzzle: Puzzle, val part1: Any?, val part2: Any?) {
     fun get(supplier: () -> Any) = try {
         supplier()
     } catch (e: NotImplementedError) {
-        abort(e.message)
+        e.message?.let(::abort) ?: abort()
     }
 }

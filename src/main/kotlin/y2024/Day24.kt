@@ -1,5 +1,3 @@
-@file:Suppress("CONTEXT_RECEIVERS_DEPRECATED")
-
 package com.emlett.aoc.y2024
 
 import com.emlett.aoc.utils.input.extract
@@ -28,20 +26,20 @@ object Day24 : Year2024() {
         data class Xor(override val reg: String, val i1: String, val i2: String) : Gate
     }
 
-    context(Map<String, Gate>)
+    context(ctx: Map<String, Gate>)
     fun Gate.output(): Boolean = when (this) {
         is Gate.In -> value
-        is Gate.Or -> getValue(i1).output() || getValue(i2).output()
-        is Gate.And -> getValue(i1).output() && getValue(i2).output()
-        is Gate.Xor -> getValue(i1).output() != getValue(i2).output()
+        is Gate.Or -> ctx.getValue(i1).output() || ctx.getValue(i2).output()
+        is Gate.And -> ctx.getValue(i1).output() && ctx.getValue(i2).output()
+        is Gate.Xor -> ctx.getValue(i1).output() != ctx.getValue(i2).output()
     }
 
-    context(Map<String, Gate>)
+    context(ctx: Map<String, Gate>)
     fun Gate.debug(level: Int): String = if (level == 0) reg else when (this) {
         is Gate.In -> this.reg
-        is Gate.Or -> "(${getValue(this.i1).debug(level - 1)} or ${getValue(this.i2).debug(level - 1)})"
-        is Gate.And -> "(${getValue(this.i1).debug(level - 1)} and ${getValue(this.i2).debug(level - 1)})"
-        is Gate.Xor -> "(${getValue(this.i1).debug(level - 1)} xor ${getValue(this.i2).debug(level - 1)})"
+        is Gate.Or -> "(${ctx.getValue(this.i1).debug(level - 1)} or ${ctx.getValue(this.i2).debug(level - 1)})"
+        is Gate.And -> "(${ctx.getValue(this.i1).debug(level - 1)} and ${ctx.getValue(this.i2).debug(level - 1)})"
+        is Gate.Xor -> "(${ctx.getValue(this.i1).debug(level - 1)} xor ${ctx.getValue(this.i2).debug(level - 1)})"
     }
 
     fun parse(str: String) = regex.extract(str) { (i1, gate, i2, id) ->
