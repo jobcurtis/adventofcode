@@ -23,7 +23,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.bundles.junit)
-    testImplementation(libs.bundles.jqwik)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 
