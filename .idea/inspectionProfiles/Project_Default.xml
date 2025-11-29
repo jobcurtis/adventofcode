@@ -48,7 +48,6 @@
     </inspection_tool>
     <inspection_tool class="ActionIsNotPreviewFriendly" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AddConversionCallMigration" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AddOperatorModifier" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="AddVarianceModifier" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="AmbiguousExpressionInWhenBranchMigration" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AmbiguousFieldAccess" enabled="false" level="WARNING" enabled_by_default="false">
@@ -779,7 +778,6 @@
       <option name="REPORT_METHODS" value="false" />
       <option name="REPORT_FIELDS" value="true" />
     </inspection_tool>
-    <inspection_tool class="CanBeVal" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CanSealedSubClassBeObject" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="CapturingCleaner" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
@@ -1111,7 +1109,6 @@
     <inspection_tool class="ConstantAssertCondition" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ConstantConditionIf" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ConstantConditionalExpression" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -1181,17 +1178,14 @@
     <inspection_tool class="Convert2streamapi" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ConvertArgumentToSet" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ConvertCallChainIntoSequence" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ConvertJavadoc" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="ConvertLambdaToReference" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ConvertNaNEquality" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConvertOldAnnotations" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ConvertPairConstructorToToFunction" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ConvertReferenceToLambda" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ConvertSecondaryConstructorToPrimary" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConvertToBasicLatin" enabled="true" level="INFORMATION" enabled_by_default="true">
@@ -1204,7 +1198,6 @@
     <inspection_tool class="CopyConstructorMissesField" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="CopyWithoutNamedArguments" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="CovariantEquals" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -1512,7 +1505,6 @@
     <inspection_tool class="ExplicitArrayFilling" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ExplicitThis" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ExplicitToImplicitClassMigration" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ExposedReference" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="ExpressionComparedToItself" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -1635,7 +1627,6 @@
     <inspection_tool class="FloatingPointEquality" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="FloatingPointLiteralPrecision" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="FlowJSConfig" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="FlowJSCoverage" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="FlowJSError" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -1652,7 +1643,6 @@
       <option name="REPORT_INDEXED_LOOP" value="true" />
       <option name="ignoreUntypedCollections" value="false" />
     </inspection_tool>
-    <inspection_tool class="ForEachParameterNotUsed" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ForEachWithRecordPatternCanBeUsed" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false">
@@ -1768,8 +1758,6 @@
       </scope>
       <option name="insideTryAllowed" value="false" />
     </inspection_tool>
-    <inspection_tool class="HoconIncludeResolution" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="HoconRequiredIncludeResolution" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="HtmlTagCanBeJavadocTag" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -2187,7 +2175,6 @@
     <inspection_tool class="JavaLangInvokeHandleSignature" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="JavaMapForEach" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="JavaModuleNaming" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -2241,7 +2228,6 @@
     <inspection_tool class="KotlinOptionsToCompilerOptionsInGradleScript" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="KotlinPlaceholderCountMatchesArgumentCount" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="KotlinRedundantDiagnosticSuppress" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="KotlinRedundantOverride" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="KotlinSealedInheritorsInJava" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="KotlinThrowableNotThrown" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="KubernetesDeprecatedKeys" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -2280,7 +2266,6 @@
     <inspection_tool class="LanguageDetectionInspection" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="true" />
     </inspection_tool>
-    <inspection_tool class="LateinitVarOverridesLateinitVar" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LawOfDemeter" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false">
         <option name="ignoreLibraryCalls" value="true" />
@@ -2420,7 +2405,6 @@
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="ManyToManyCascadeRemove" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="MapGetWithNotNullAssertionOperator" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="MapReplaceableByEnumMap" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -2452,7 +2436,7 @@
     <inspection_tool class="MeaninglessRecordAnnotationInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="MemberVisibilityCanBePrivate" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="MemberVisibilityCanBePrivate" enabled="false" level="INFO" enabled_by_default="false" />
     <inspection_tool class="MetaAnnotationWithoutRuntimeRetention" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -2686,7 +2670,6 @@
     <inspection_tool class="MoveFieldAssignmentToInitializer" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="MoveVariableDeclarationIntoWhen" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="MultiCatchCanBeSplit" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
@@ -2752,7 +2735,6 @@
     <inspection_tool class="NestedConditionalExpression" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="NestedLambdaShadowedImplicitParameter" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="NestedMethodCall" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false">
         <option name="m_ignoreFieldInitializations" value="true" />
@@ -3364,11 +3346,9 @@
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="RecursiveEqualsCall" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="RecursivePropertyAccessor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantArrayCreation" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="RedundantAsSequence" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantAsync" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantCast" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
@@ -3379,7 +3359,6 @@
     <inspection_tool class="RedundantCollectionOperation" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="RedundantCompanionReference" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantComparatorComparing" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
@@ -3389,7 +3368,6 @@
     <inspection_tool class="RedundantConstructorKeyword" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="RedundantEmbeddedExpression" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RedundantEmptyInitializerBlock" enabled="true" level="INFO" enabled_by_default="true" />
-    <inspection_tool class="RedundantEnumConstructorInvocation" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantEscapeInRegexReplacement" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RedundantExplicitClose" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
@@ -3437,16 +3415,12 @@
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="RedundantNotNullExtensionReceiverOfInline" enabled="false" level="INFORMATION" enabled_by_default="false" />
-    <inspection_tool class="RedundantNullableReturnType" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="RedundantObjectTypeCheck" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="RedundantOperationOnEmptyContainer" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="RedundantRecordConstructor" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="RedundantRequireNotNullCall" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="RedundantSamConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantScheduledForRemovalAnnotation" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -3468,7 +3442,6 @@
     <inspection_tool class="RedundantUnmodifiable" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="RedundantWith" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReflectionForUnavailableAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -3485,22 +3458,15 @@
     <inspection_tool class="RegExpSimplifiable" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="RegExpSuspiciousBackref" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RemoveEmptyClassBody" enabled="true" level="INFO" enabled_by_default="true" />
-    <inspection_tool class="RemoveEmptyParenthesesFromAnnotationEntry" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RemoveEmptyParenthesesFromLambdaCall" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="RemoveEmptyPrimaryConstructor" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="RemoveExplicitSuperQualifier" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="RemoveExplicitTypeArguments" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RemoveForLoopIndices" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RemoveLiteralUnderscores" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="RemoveRedundantCallsOfConversionMethods" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="RemoveRedundantSpreadOperator" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceAllDot" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ReplaceArrayEqualityOpWithArraysEquals" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ReplaceAssertBooleanWithAssertEquality" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceAssignmentWithOperatorAssignment" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false">
         <option name="ignoreLazyOperators" value="true" />
@@ -3509,26 +3475,19 @@
       <option name="ignoreLazyOperators" value="true" />
       <option name="ignoreObscureOperators" value="false" />
     </inspection_tool>
-    <inspection_tool class="ReplaceAssociateFunction" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceGetOrSet" enabled="true" level="INFO" enabled_by_default="true" />
-    <inspection_tool class="ReplaceGuardClauseWithFunctionCall" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceInefficientStreamCount" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ReplaceIsEmptyWithIfEmpty" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceManualRangeWithIndicesCalls" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ReplaceMapIndexedWithListGenerator" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceNegatedIsEmptyWithIsNotEmpty" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="ReplaceNotNullAssertionWithElvisReturn" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ReplaceNullCheck" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="ReplaceOnLiteralHasNoEffect" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="ReplacePutWithAssignment" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="ReplaceRangeStartEndInclusiveWithFirstLast" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="ReplaceRangeToWithUntil" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceStringFormatWithLiteral" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceSubstringWithDropLast" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceSubstringWithIndexingOperation" enabled="true" level="INFORMATION" enabled_by_default="true" />
@@ -3536,14 +3495,11 @@
     <inspection_tool class="ReplaceSubstringWithSubstringBefore" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceSubstringWithTake" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceToStringWithStringTemplate" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ReplaceToWithInfixForm" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceWithEnumMap" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ReplaceWithIgnoreCaseEquals" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceWithImportAlias" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceWithJavadoc" enabled="false" level="INFORMATION" enabled_by_default="false">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="ReplaceWithOperatorAssignment" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="RequiredArtifactTypeInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ReservedWordUsedAsNameJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RestParamTypeInspection" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -3590,7 +3546,6 @@
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="SafeCastWithReturn" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SafeLock" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -3610,7 +3565,6 @@
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="ScopeFunctionConversion" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="SelfReferenceConstructorParameter" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SequencedCollectionMethodCanBeUsed" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SerialAnnotationUsedOnWrongMember" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
@@ -3705,8 +3659,6 @@
     <inspection_tool class="SimplifiableIfStatement" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Kotlin Files" level="INFORMATION" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="SimplifyAssertNotNull" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="SimplifyBooleanWithConstants" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SimplifyCollector" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -3720,7 +3672,6 @@
     <inspection_tool class="SimplifyStreamApiCallChains" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="SimplifyWhenWithBooleanConstantCondition" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SingleCharacterStartsWith" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -3954,7 +3905,6 @@
     <inspection_tool class="SuspiciousDateFormat" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="SuspiciousEqualsCombination" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="SuspiciousGetterSetter" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
@@ -4495,7 +4445,6 @@
     <inspection_tool class="UnnecessaryUnicodeEscape" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="UnnecessaryVariable" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="UnpredictableBigDecimalConstructorCall" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false">
         <option name="ignoreReferences" value="true" />
@@ -4560,19 +4509,16 @@
     <inspection_tool class="UnusedLabel" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="UnusedLambdaExpressionBody" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnusedLibrary" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="UnusedMainParameter" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
-    <inspection_tool class="UnusedReceiverParameter" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnusedReturnValue" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Kotlin Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="UnusedSymbol" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="false" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="UnusedUnaryOperator" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnusedVariable" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UnusedVersionCatalogEntry" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UpdateDependencyToLatestVersion" enabled="false" level="INFORMATION" enabled_by_default="false" />
