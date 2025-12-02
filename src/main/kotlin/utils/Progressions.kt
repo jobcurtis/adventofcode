@@ -19,18 +19,18 @@ private infix fun IntPrg.unionUnchecked(other: IntPrg) = IntRange(min(first, oth
 fun List<IntRange>.reduce() = reduceRanges(this)
 
 private tailrec fun reduceRanges(ranges: List<IntRange>): List<IntRange> {
-    if (ranges.size <= 1) return ranges
-    for (i in 0 until ranges.size - 1) {
-        for (j in i + 1 until ranges.size) {
-            if (ranges[i] intersects ranges[j] || ranges[i] adjacentTo ranges[j]) {
-                return reduceRanges(mutableListOf<IntRange>().apply {
-                    addAll(ranges.subList(0, i))
-                    addAll(ranges.subList(i + 1, j))
-                    addAll(ranges.subList(j + 1, ranges.size))
-                    add(ranges[i] unionUnchecked ranges[j])
-                })
-            }
-        }
+  if (ranges.size <= 1) return ranges
+  for (i in 0 until ranges.size - 1) {
+    for (j in i + 1 until ranges.size) {
+      if (ranges[i] intersects ranges[j] || ranges[i] adjacentTo ranges[j]) {
+        return reduceRanges(mutableListOf<IntRange>().apply {
+          addAll(ranges.subList(0, i))
+          addAll(ranges.subList(i + 1, j))
+          addAll(ranges.subList(j + 1, ranges.size))
+          add(ranges[i] unionUnchecked ranges[j])
+        })
+      }
     }
-    return ranges
+  }
+  return ranges
 }

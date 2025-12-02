@@ -6,74 +6,74 @@ import kotlin.math.sqrt
 
 data class Point2D(val x: Int, val y: Int) {
 
-    constructor(x: String, y: String) : this(x.toInt(), y.toInt())
+  constructor(x: String, y: String) : this(x.toInt(), y.toInt())
 
-    override fun toString() = "($x, $y)"
+  override fun toString() = "($x, $y)"
 
-    fun manhattanDistanceTo(other: Point2D) = abs(this.x - other.x) + abs(this.y - other.y)
-    fun euclideanDistanceTo(other: Point2D) = sqrt(((this.x - other.x).sqr + (this.y - other.y).sqr).toDouble())
+  fun manhattanDistanceTo(other: Point2D) = abs(this.x - other.x) + abs(this.y - other.y)
+  fun euclideanDistanceTo(other: Point2D) = sqrt(((this.x - other.x).sqr + (this.y - other.y).sqr).toDouble())
 
-    fun angle(other: Point2D) = atan2((other.x - this.x).toDouble(), (other.y - this.y).toDouble())
+  fun angle(other: Point2D) = atan2((other.x - this.x).toDouble(), (other.y - this.y).toDouble())
 
-    fun lineTo(dest: Point2D): List<Point2D> {
-        require(this != dest) { "$this must not equal $dest" }
-        return when {
-            this.x == dest.x && this.y < dest.y -> (this.y.rangeTo(dest.y)).map { y -> Point2D(this.x, y) }
-            this.x == dest.x && this.y > dest.y -> (this.y.downTo(dest.y)).map { y -> Point2D(this.x, y) }
-            this.y == dest.y && this.x < dest.x -> (this.x.rangeTo(dest.x)).map { x -> Point2D(x, this.y) }
-            this.y == dest.y && this.x > dest.x -> (this.x.downTo(dest.x)).map { x -> Point2D(x, this.y) }
-            else -> error("Points must have a common axis")
-        }
+  fun lineTo(dest: Point2D): List<Point2D> {
+    require(this != dest) { "$this must not equal $dest" }
+    return when {
+      this.x == dest.x && this.y < dest.y -> (this.y.rangeTo(dest.y)).map { y -> Point2D(this.x, y) }
+      this.x == dest.x && this.y > dest.y -> (this.y.downTo(dest.y)).map { y -> Point2D(this.x, y) }
+      this.y == dest.y && this.x < dest.x -> (this.x.rangeTo(dest.x)).map { x -> Point2D(x, this.y) }
+      this.y == dest.y && this.x > dest.x -> (this.x.downTo(dest.x)).map { x -> Point2D(x, this.y) }
+      else -> error("Points must have a common axis")
     }
+  }
 
-    private val Int.sqr get() = this * this
+  private val Int.sqr get() = this * this
 
-    companion object {
-        val zero = Point2D(0, 0)
-    }
+  companion object {
+    val zero = Point2D(0, 0)
+  }
 
-    infix operator fun plus(other: Point2D) = Point2D(this.x + other.x, this.y + other.y)
-    infix operator fun plus(direction: Direction) = when (direction) {
-        Direction.NORTH -> copy(y = y + 1)
-        Direction.EAST -> copy(x = x + 1)
-        Direction.SOUTH -> copy(y = y - 1)
-        Direction.WEST -> copy(x = x - 1)
-    }
+  infix operator fun plus(other: Point2D) = Point2D(this.x + other.x, this.y + other.y)
+  infix operator fun plus(direction: Direction) = when (direction) {
+    Direction.NORTH -> copy(y = y + 1)
+    Direction.EAST -> copy(x = x + 1)
+    Direction.SOUTH -> copy(y = y - 1)
+    Direction.WEST -> copy(x = x - 1)
+  }
 
-    infix operator fun plus(pair: Pair<Direction, Int>) = when (pair.first) {
-        Direction.NORTH -> copy(y = y + pair.second)
-        Direction.EAST -> copy(x = x + pair.second)
-        Direction.SOUTH -> copy(y = y - pair.second)
-        Direction.WEST -> copy(x = x - pair.second)
-    }
+  infix operator fun plus(pair: Pair<Direction, Int>) = when (pair.first) {
+    Direction.NORTH -> copy(y = y + pair.second)
+    Direction.EAST -> copy(x = x + pair.second)
+    Direction.SOUTH -> copy(y = y - pair.second)
+    Direction.WEST -> copy(x = x - pair.second)
+  }
 
-    fun move(direction: Direction, distance: Int) = when (direction) {
-        Direction.NORTH -> copy(y = y + distance)
-        Direction.EAST -> copy(x = x + distance)
-        Direction.SOUTH -> copy(y = y - distance)
-        Direction.WEST -> copy(x = x - distance)
-    }
+  fun move(direction: Direction, distance: Int) = when (direction) {
+    Direction.NORTH -> copy(y = y + distance)
+    Direction.EAST -> copy(x = x + distance)
+    Direction.SOUTH -> copy(y = y - distance)
+    Direction.WEST -> copy(x = x - distance)
+  }
 
-    fun directionToOrNull(other: Point2D) = when {
-        this.x > other.x && this.y == other.y -> Direction.WEST
-        this.x < other.x && this.y == other.y -> Direction.EAST
-        this.y > other.y && this.x == other.x -> Direction.SOUTH
-        this.y < other.y && this.x == other.x -> Direction.NORTH
-        else -> null
-    }
+  fun directionToOrNull(other: Point2D) = when {
+    this.x > other.x && this.y == other.y -> Direction.WEST
+    this.x < other.x && this.y == other.y -> Direction.EAST
+    this.y > other.y && this.x == other.x -> Direction.SOUTH
+    this.y < other.y && this.x == other.x -> Direction.NORTH
+    else -> null
+  }
 
-    fun directionTo(other: Point2D) =
-        directionToOrNull(other) ?: throw IllegalArgumentException("No cardinal direction from $this to $other")
+  fun directionTo(other: Point2D) =
+    directionToOrNull(other) ?: throw IllegalArgumentException("No cardinal direction from $this to $other")
 
-    val adjacentPointsDiagonal: Set<Point2D>
-        get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
-            .map { (x, y) -> Point2D(x, y) }
-            .map { diff -> this + diff }
-            .toSet()
+  val adjacentPointsDiagonal: Set<Point2D>
+    get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1, -1 to -1, -1 to 1, 1 to -1, 1 to 1)
+      .map { (x, y) -> Point2D(x, y) }
+      .map { diff -> this + diff }
+      .toSet()
 
-    val adjacentPoints: Set<Point2D>
-        get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)
-            .map { (x, y) -> Point2D(x, y) }
-            .map { diff -> this + diff }
-            .toSet()
+  val adjacentPoints: Set<Point2D>
+    get() = listOf(-1 to 0, 0 to -1, 1 to 0, 0 to 1)
+      .map { (x, y) -> Point2D(x, y) }
+      .map { diff -> this + diff }
+      .toSet()
 }

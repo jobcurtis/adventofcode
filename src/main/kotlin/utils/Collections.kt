@@ -1,11 +1,11 @@
 package com.emlett.aoc.utils
 
 fun <T> List<T>.permutations(): Set<List<T>> {
-    if (isEmpty()) return setOf(emptyList())
+  if (isEmpty()) return setOf(emptyList())
 
-    return buildSet {
-        this@permutations.forEach { i -> (this@permutations - i).permutations().forEach { item -> add(item + i) } }
-    }
+  return buildSet {
+    this@permutations.forEach { i -> (this@permutations - i).permutations().forEach { item -> add(item + i) } }
+  }
 }
 
 /**
@@ -17,20 +17,20 @@ fun <T> List<T>.permutations(): Set<List<T>> {
  * elements are grouped based on the splits determined by the predicate.
  */
 fun <T> List<T>.splitBy(predicate: (T) -> Boolean): List<List<T>> {
-    val splits = buildList {
-        var inSublist = false
+  val splits = buildList {
+    var inSublist = false
 
-        for ((index, item) in this@splitBy.withIndex()) {
-            when (predicate(item)) {
-                true -> if (inSublist) add(index - 1).also { inSublist = false }
-                false -> if (!inSublist) add(index).also { inSublist = true }
-            }
-        }
-
-        if (inSublist) add(this@splitBy.lastIndex)
+    for ((index, item) in this@splitBy.withIndex()) {
+      when (predicate(item)) {
+        true -> if (inSublist) add(index - 1).also { inSublist = false }
+        false -> if (!inSublist) add(index).also { inSublist = true }
+      }
     }
 
-    return splits.chunked(2) { (from, to) -> slice(from..to) }
+    if (inSublist) add(this@splitBy.lastIndex)
+  }
+
+  return splits.chunked(2) { (from, to) -> slice(from..to) }
 }
 
 val <T> List<T>.head: T inline get() = first()
@@ -43,18 +43,18 @@ val <T> List<T>.tail: T inline get() = last()
 fun <T> Collection<T>.mostFrequent() = groupingBy { it }.eachCount().maxBy { (_, count) -> count }.toPair()
 
 fun <T> List<T>.bisect(low: Int, high: Int, predicate: List<T>.(Int) -> Boolean): T {
-    var low = low
-    var high = high
+  var low = low
+  var high = high
 
-    while (low < high) {
-        val mid = (low + high) / 2
+  while (low < high) {
+    val mid = (low + high) / 2
 
-        if (predicate(mid)) {
-            high = mid
-        } else {
-            low = mid + 1
-        }
+    if (predicate(mid)) {
+      high = mid
+    } else {
+      low = mid + 1
     }
+  }
 
-    return this[low - 1]
+  return this[low - 1]
 }

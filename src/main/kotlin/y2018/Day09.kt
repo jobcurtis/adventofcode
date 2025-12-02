@@ -6,36 +6,36 @@ import java.util.*
 import kotlin.math.absoluteValue
 
 object Day09 : Year2018() {
-    val regex = Regex("""(\d+) players; last marble is worth (\d+) points""")
-    val input by lazy { regex.extractInts(text) { (players, marbles) -> players to marbles } }
-    override fun part1() = input.let { (players, marbles) -> play(players, marbles) }.scores.values.max()
-    override fun part2() = input.let { (players, marbles) -> play(players, marbles * 100) }.scores.values.max()
+  val regex = Regex("""(\d+) players; last marble is worth (\d+) points""")
+  val input by lazy { regex.extractInts(text) { (players, marbles) -> players to marbles } }
+  override fun part1() = input.let { (players, marbles) -> play(players, marbles) }.scores.values.max()
+  override fun part2() = input.let { (players, marbles) -> play(players, marbles * 100) }.scores.values.max()
 
-    data class State(
-        val scores: MutableMap<Int, Long> = mutableMapOf(),
-        val current: Int = 0,
-        val circle: ArrayDeque<Int> = ArrayDeque<Int>().apply { add(0) }
-    )
+  data class State(
+    val scores: MutableMap<Int, Long> = mutableMapOf(),
+    val current: Int = 0,
+    val circle: ArrayDeque<Int> = ArrayDeque<Int>().apply { add(0) }
+  )
 
-    fun play(players: Int, marbles: Int): State {
-        val players = (1..players).asSequence().repeat()
-        val marbles = (1..marbles).asSequence()
+  fun play(players: Int, marbles: Int): State {
+    val players = (1..players).asSequence().repeat()
+    val marbles = (1..marbles).asSequence()
 
-        return players.zip(marbles).fold(State()) { state, (player, marble) ->
-            if (marble % 23 == 0) state.apply {
-                circle.rotate(-7)
-                scores.compute(player) { _, score -> (score ?: 0) + marble + circle.removeFirst() }
-                circle.rotate(1)
-            } else state.apply {
-                circle.rotate(1)
-                circle.addFirst(marble)
-            }
-        }
+    return players.zip(marbles).fold(State()) { state, (player, marble) ->
+      if (marble % 23 == 0) state.apply {
+        circle.rotate(-7)
+        scores.compute(player) { _, score -> (score ?: 0) + marble + circle.removeFirst() }
+        circle.rotate(1)
+      } else state.apply {
+        circle.rotate(1)
+        circle.addFirst(marble)
+      }
     }
+  }
 
-    fun <T> Deque<T>.rotate(n: Int): Unit = when {
-        n < 0 -> repeat(n.absoluteValue) { addLast(removeFirst()) }
-        n > 0 -> repeat(n.absoluteValue) { addFirst(removeLast()) }
-        else -> Unit
-    }
+  fun <T> Deque<T>.rotate(n: Int): Unit = when {
+    n < 0 -> repeat(n.absoluteValue) { addLast(removeFirst()) }
+    n > 0 -> repeat(n.absoluteValue) { addFirst(removeLast()) }
+    else -> Unit
+  }
 }
