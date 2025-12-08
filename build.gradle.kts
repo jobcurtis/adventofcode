@@ -36,6 +36,7 @@ kotlin {
     freeCompilerArgs.add("-Xnullability-annotations=@org.jspecify.annotations:strict")
     freeCompilerArgs.add("-Xemit-jvm-type-annotations")
     freeCompilerArgs.add("-Xwhen-guards")
+    freeCompilerArgs.add("-Xnested-type-aliases")
   }
 }
 
