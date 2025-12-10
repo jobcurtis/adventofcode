@@ -8,6 +8,18 @@ fun <T> List<T>.permutations(): Set<List<T>> {
   }
 }
 
+fun <T> Collection<T>.combinations(n: Int): List<Set<T>> {
+  require(n in 0..size)
+
+  if (n == 0) return listOf(emptySet())
+  if (n == size) return listOf(toSet())
+
+  val first = first()
+  val rest = drop(1)
+
+  return rest.combinations(n - 1).map { it + first } + rest.combinations(n)
+}
+
 /**
  * Splits the list into sublists based on a given predicate.
  *
