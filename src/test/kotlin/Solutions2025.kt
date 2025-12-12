@@ -15,4 +15,5 @@ class Solutions2025 {
   @Nested inner class Day09 : Solutions(Day09, 4777824480, 1542119040L)
   @Nested inner class Day10 : Solutions(Day10, 491, null)
   @Nested inner class Day11 : Solutions(Day11, 652L, 362956369749210)
+  @Nested inner class Day12 : Solutions(Day12, 528, null)
 }
